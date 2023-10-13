@@ -7,6 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.dataTables.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.dataTables.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.foundation.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.foundation.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.jqueryui.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.jqueryui.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.material.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.material.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.semanticui.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.semanticui.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.uikit.js" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.uikit.min.js" />
+    <None Include="wwwroot\lib\DataTables\js\jquery.dataTables.js" />
+    <None Include="wwwroot\lib\DataTables\js\jquery.dataTables.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PLMS.Service\PLMS.Service.csproj" />
   </ItemGroup>
 
