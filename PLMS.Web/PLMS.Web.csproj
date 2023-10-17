@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PLMS.Service\PLMS.Service.csproj" />
+    <ProjectReference Include="..\PLMS.Caching\PLMS.Caching.csproj" />
   </ItemGroup>
 
 </Project>
