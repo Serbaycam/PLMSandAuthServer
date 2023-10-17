@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PLMS.Web.Models;
-using System.Diagnostics;
-
-namespace PLMS.Web.Controllers
+﻿namespace PLMS.Web.Controllers
 {
     public class HomeController : Controller
     {

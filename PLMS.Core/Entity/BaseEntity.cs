@@ -1,4 +1,4 @@
-﻿namespace PLMS.Core
+﻿namespace PLMS.Core.Entity
 {
     public abstract class BaseEntity
     {
