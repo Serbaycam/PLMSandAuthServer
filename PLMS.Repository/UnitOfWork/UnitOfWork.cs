@@ -6,7 +6,7 @@ namespace PLMS.Repository.UnitOfWork
     public class UnitOfWork<TContext> : IUnitOfWork<TContext>
         where TContext : DbContext
     {
-        private readonly TContext _context;
+        private readonly DbContext _context;
         public UnitOfWork(TContext context)
         {
             _context = context;

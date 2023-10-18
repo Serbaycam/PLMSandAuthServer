@@ -1,12 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using PLMS.Core.Repositories;
-using PLMS.Core.Services;
-using PLMS.Core.UnitOfWork;
-using PLMS.Repository.Contexts;
-using PLMS.Repository.Repositories;
-using PLMS.Repository.UnitOfWork;
-using System.Reflection;
-
 namespace PLMS.Web
 {
     public class Program
@@ -17,9 +8,9 @@ namespace PLMS.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            //builder.Services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));
-            //builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<,>));
-            //builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
+            builder.Services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));
+            builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepository<,>));
+            //builder.Services.TryAddScoped(typeof(IService<>),typeof(Service<>));
 
 
 

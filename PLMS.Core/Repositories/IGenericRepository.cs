@@ -2,16 +2,16 @@
 
 namespace PLMS.Core.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<TEntity,TContext> where TEntity : class
     {
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
-        Task<IEnumerable<T>> WhereAsync(Expression<Func<T, bool>> predicate);
-        Task AddAsync(T entity);
-        Task AddRangeAsync(IEnumerable<T> entities);
-        void Update(T entity);
-        void UpdateRange(IEnumerable<T> entities);
-        void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> GetByIdAsync(int id);
+        Task<IEnumerable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate);
+        Task AddAsync(TEntity entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
+        void Update(TEntity entity);
+        void UpdateRange(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
     }
 }

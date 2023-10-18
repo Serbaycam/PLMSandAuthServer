@@ -1,8 +1,4 @@
-﻿global using Microsoft.AspNetCore.Mvc;
-global using PLMS.Web.Models;
-global using System.Diagnostics;
-global using System.Linq;
-global using Microsoft.EntityFrameworkCore;
+﻿global using Microsoft.EntityFrameworkCore;
 global using PLMS.Core.Repositories;
 global using PLMS.Core.UnitOfWork;
 global using PLMS.Repository.Contexts;

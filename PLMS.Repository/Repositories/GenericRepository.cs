@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace PLMS.Repository.Repositories
 {
-    public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>
+    public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity,TContext>
         where TEntity : class
         where TContext : DbContext
     {
