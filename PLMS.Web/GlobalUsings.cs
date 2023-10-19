@@ -9,3 +9,5 @@ global using PLMS.Repository.Contexts;
 global using PLMS.Repository.Repositories;
 global using PLMS.Repository.UnitOfWork;
 global using System.Reflection;
+global using PLMS.Core.Services;
+global using PLMS.Service.Services;

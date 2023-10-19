@@ -1,3 +1,4 @@
+
 namespace PLMS.Web
 {
     public class Program
@@ -10,7 +11,7 @@ namespace PLMS.Web
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));
             builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepository<,>));
-            //builder.Services.TryAddScoped(typeof(IService<>),typeof(Service<>));
+            builder.Services.AddScoped(typeof(IGenericService<,>),typeof(GenericService<,>));
 
 
 

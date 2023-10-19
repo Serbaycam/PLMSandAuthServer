@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace PLMS.Web.Areas.Account.Controllers
+﻿namespace PLMS.Web.Areas.Account.Controllers
 {
     [Area("Account")]
     public class AccountController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Register()
         {
             return View();
         }
