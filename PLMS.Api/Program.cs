@@ -13,9 +13,14 @@ namespace PLMS.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+
             builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
-            //builder.Services.TryAddScoped(typeof(IService<>),typeof(Service<>));
+            builder.Services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+
+            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
+
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false)

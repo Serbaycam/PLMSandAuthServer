@@ -11,6 +11,8 @@ namespace PLMS.Repository.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x=>x.Name).IsRequired().HasMaxLength(128);
+            builder.Property(x => x.CreatedById).HasMaxLength(36);
+            builder.Property(x => x.ModifiedById).HasMaxLength(36);
 
             builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
         }

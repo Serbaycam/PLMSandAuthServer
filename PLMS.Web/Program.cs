@@ -1,4 +1,3 @@
-
 namespace PLMS.Web
 {
     public class Program
@@ -9,11 +8,13 @@ namespace PLMS.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
             builder.Services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));
             builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepository<,>));
             builder.Services.AddScoped(typeof(IGenericService<,>),typeof(GenericService<,>));
 
-
+            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
