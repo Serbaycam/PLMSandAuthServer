@@ -7,6 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Account\Data\**" />
+    <Compile Remove="Areas\Account\Models\**" />
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\Account\Data\**" />
+    <Content Remove="Areas\Account\Models\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\Account\Data\**" />
+    <EmbeddedResource Remove="Areas\Account\Models\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\Account\Data\**" />
+    <None Remove="Areas\Account\Models\**" />
+    <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.js" />
     <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.min.js" />
     <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap4.js" />
@@ -37,13 +56,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PLMS.Caching\PLMS.Caching.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Account\Data\" />
-    <Folder Include="Areas\Account\Models\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>
