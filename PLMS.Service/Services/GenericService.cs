@@ -2,6 +2,7 @@
 using PLMS.Core.Repositories;
 using PLMS.Core.Services;
 using PLMS.Core.UnitOfWork;
+using PLMS.Service.Exceptions;
 using System.Linq.Expressions;
 
 namespace PLMS.Service.Services
@@ -67,7 +68,10 @@ namespace PLMS.Service.Services
 
         public async Task<IEnumerable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _genericRepository.WhereAsync(predicate);
+            var hasEntity = await _genericRepository.WhereAsync(predicate);
+            if (hasEntity == null)
+                throw new NotFoundException($"{typeof(TEntity).Name} not found");
+            return hasEntity;
         }
     }
 }

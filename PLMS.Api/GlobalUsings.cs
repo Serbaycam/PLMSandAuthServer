@@ -16,3 +16,5 @@ global using PLMS.Core.DTOs.Product;
 global using FluentValidation.AspNetCore;
 global using PLMS.Service.Validations;
 global using PLMS.Api.Filters;
+global using PLMS.Api.Middlewares;
+global using Microsoft.AspNetCore.Mvc.Filters;

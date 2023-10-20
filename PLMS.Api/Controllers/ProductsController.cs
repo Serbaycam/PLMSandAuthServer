@@ -21,8 +21,8 @@
             return CreateActionResult(CustomResponseDTO<List<ProductDto>>.Success(200, productDtos));
         }
 
-        
 
+        [ServiceFilter(typeof(NotFoundFilter<Product,AppDbContext>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
