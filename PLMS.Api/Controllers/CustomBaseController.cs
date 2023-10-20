@@ -4,7 +4,7 @@ using PLMS.Core.DTOs.CustomResponse;
 
 namespace PLMS.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CustomBaseController : ControllerBase
     {
