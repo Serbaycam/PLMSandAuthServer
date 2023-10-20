@@ -12,3 +12,5 @@ global using System.Reflection;
 global using PLMS.Core.Services;
 global using PLMS.Service.Services;
 global using PLMS.Service.Mapping;
+global using FluentValidation.AspNetCore;
+global using PLMS.Service.Validations;

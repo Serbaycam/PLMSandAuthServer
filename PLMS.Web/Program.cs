@@ -7,7 +7,7 @@ namespace PLMS.Web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
 
 
             builder.Services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));

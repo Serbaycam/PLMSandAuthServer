@@ -13,3 +13,6 @@ global using AutoMapper;
 global using PLMS.Core.Entity;
 global using PLMS.Core.DTOs.CustomResponse;
 global using PLMS.Core.DTOs.Product;
+global using FluentValidation.AspNetCore;
+global using PLMS.Service.Validations;
+global using PLMS.Api.Filters;

@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PLMS.Core.DTOs.CustomResponse;
-
-namespace PLMS.Api.Controllers
+﻿namespace PLMS.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
