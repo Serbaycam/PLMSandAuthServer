@@ -68,10 +68,7 @@ namespace PLMS.Service.Services
 
         public async Task<IEnumerable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            var hasEntity = await _genericRepository.WhereAsync(predicate);
-            if (hasEntity == null)
-                throw new NotFoundException($"{typeof(TEntity).Name} not found");
-            return hasEntity;
+            return await _genericRepository.WhereAsync(predicate);
         }
     }
 }
