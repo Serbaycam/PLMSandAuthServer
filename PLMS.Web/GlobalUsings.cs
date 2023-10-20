@@ -14,3 +14,6 @@ global using PLMS.Service.Services;
 global using PLMS.Service.Mapping;
 global using FluentValidation.AspNetCore;
 global using PLMS.Service.Validations;
+global using Autofac.Extensions.DependencyInjection;
+global using Autofac;
+global using PLMS.Web.Modules;

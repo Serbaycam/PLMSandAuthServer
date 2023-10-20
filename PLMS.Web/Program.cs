@@ -10,10 +10,6 @@ namespace PLMS.Web
             builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
 
 
-            builder.Services.AddScoped(typeof(IUnitOfWork<>),typeof(UnitOfWork<>));
-            builder.Services.AddScoped(typeof(IGenericRepository<,>),typeof(GenericRepository<,>));
-            builder.Services.AddScoped(typeof(IGenericService<,>),typeof(GenericService<,>));
-
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
 
             var env = builder.Environment;
@@ -28,6 +24,8 @@ namespace PLMS.Web
                     option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
                 });
             });
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

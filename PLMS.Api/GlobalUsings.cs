@@ -18,3 +18,6 @@ global using PLMS.Service.Validations;
 global using PLMS.Api.Filters;
 global using PLMS.Api.Middlewares;
 global using Microsoft.AspNetCore.Mvc.Filters;
+global using Autofac;
+global using Autofac.Extensions.DependencyInjection;
+global using PLMS.Api.Modules;
