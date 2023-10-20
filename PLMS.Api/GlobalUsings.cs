@@ -8,3 +8,8 @@ global using System.Reflection;
 global using PLMS.Core.Services;
 global using PLMS.Service.Services;
 global using PLMS.Service.Mapping;
+global using Microsoft.AspNetCore.Mvc;
+global using AutoMapper;
+global using PLMS.Core.Entity;
+global using PLMS.Core.DTOs.CustomResponse;
+global using PLMS.Core.DTOs.Product;
