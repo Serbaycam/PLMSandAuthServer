@@ -1,9 +1,7 @@
-﻿using PLMS.Core.Entity;
-
-namespace PLMS.Core.DTOs.Category
+﻿namespace PLMS.Core.DTOs.Category
 {
-    public class CategoryDto : BaseEntity
+    public class CategoryDto : BaseDto
     {
-        public required string Name { get; set; }
+        public string ?Name { get; set; }
     }
 }

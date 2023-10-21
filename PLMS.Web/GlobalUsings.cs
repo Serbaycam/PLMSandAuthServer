@@ -17,3 +17,7 @@ global using PLMS.Service.Validations;
 global using Autofac.Extensions.DependencyInjection;
 global using Autofac;
 global using PLMS.Web.Modules;
+global using AutoMapper;
+global using PLMS.Core.DTOs.Product;
+global using PLMS.Core.Entity;
+global using PLMS.Core.DTOs;

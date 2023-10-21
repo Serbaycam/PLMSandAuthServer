@@ -3,14 +3,18 @@
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IMapper mapper;
+        private readonly IGenericService<Product, AppDbContext> genericService;
+        public HomeController(ILogger<HomeController> logger, IGenericService<Product, AppDbContext> genericService, IMapper mapper)
         {
             _logger = logger;
+            this.genericService = genericService;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
+
             return View();
         }
 
