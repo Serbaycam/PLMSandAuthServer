@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AuthJWT.Core\AuthJWT.Core.csproj" />
+  </ItemGroup>
+
 </Project>
