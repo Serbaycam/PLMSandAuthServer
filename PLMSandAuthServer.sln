@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.Service", "AuthJWT.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.Repository", "AuthJWT.Repository\AuthJWT.Repository.csproj", "{632651DB-D512-47C4-957D-9292E2882533}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.SharedLibrary", "AuthJWT.SharedLibrary\AuthJWT.SharedLibrary.csproj", "{5549519F-BE8B-4BF9-BDFD-18259C776E8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{632651DB-D512-47C4-957D-9292E2882533}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{632651DB-D512-47C4-957D-9292E2882533}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{632651DB-D512-47C4-957D-9292E2882533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
