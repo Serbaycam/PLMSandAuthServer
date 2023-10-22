@@ -12,9 +12,9 @@
             this.mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
+            var result = mapper.Map<IEnumerable<ProductDto>>(await genericService.GetAllAsync());
             return View();
         }
 
