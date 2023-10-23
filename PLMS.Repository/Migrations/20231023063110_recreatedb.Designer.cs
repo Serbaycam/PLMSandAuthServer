@@ -12,8 +12,8 @@ using PLMS.Repository.Contexts;
 namespace PLMS.Repository.Migrations
 {
     [DbContext(typeof(PLMSDbContext))]
-    [Migration("20231019145216_ConfigrationsModified")]
-    partial class ConfigrationsModified
+    [Migration("20231023063110_recreatedb")]
+    partial class recreatedb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

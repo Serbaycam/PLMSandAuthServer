@@ -25,11 +25,11 @@ namespace PLMS.Api
                 .AddJsonFile("appsettings.json", optional: false)
                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 ;
-            builder.Services.AddDbContext<AppDbContext>(x =>
+            builder.Services.AddDbContext<PLMSDbContext>(x =>
             {
-                x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), option =>
+                x.UseSqlServer(builder.Configuration.GetConnectionString("PLMSConnection"), option =>
                 {
-                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(PLMSDbContext)).GetName().Name);
                 });
             });
 

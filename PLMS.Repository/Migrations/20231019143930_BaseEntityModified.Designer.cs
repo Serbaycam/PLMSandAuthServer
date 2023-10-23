@@ -11,7 +11,7 @@ using PLMS.Repository.Contexts;
 
 namespace PLMS.Repository.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PLMSDbContext))]
     [Migration("20231019143930_BaseEntityModified")]
     partial class BaseEntityModified
     {

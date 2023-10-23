@@ -3,10 +3,10 @@
     public class ProductsController : CustomBaseController
     {
         private readonly IMapper _mapper;
-        private readonly IGenericService<Product, AppDbContext> _genericService;
-        private readonly IUnitOfWork<AppDbContext> _unitOfWork;
+        private readonly IGenericService<Product, PLMSDbContext> _genericService;
+        private readonly IUnitOfWork<PLMSDbContext> _unitOfWork;
 
-        public ProductsController(IMapper mapper, IGenericService<Product, AppDbContext> genericService, IUnitOfWork<AppDbContext> unitOfWork)
+        public ProductsController(IMapper mapper, IGenericService<Product, PLMSDbContext> genericService, IUnitOfWork<PLMSDbContext> unitOfWork)
         {
             _mapper = mapper;
             _genericService = genericService;
@@ -22,7 +22,7 @@
         }
 
 
-        [ServiceFilter(typeof(NotFoundFilter<Product,AppDbContext>))]
+        [ServiceFilter(typeof(NotFoundFilter<Product,PLMSDbContext>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

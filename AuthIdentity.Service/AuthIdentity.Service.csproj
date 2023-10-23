@@ -10,4 +10,11 @@
     <ProjectReference Include="..\AuthIdentity.Repository\AuthIdentity.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Validations\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

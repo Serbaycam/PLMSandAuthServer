@@ -11,7 +11,7 @@ using PLMS.Repository.Contexts;
 
 namespace PLMS.Repository.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PLMSDbContext))]
     [Migration("20231018145012_Initial")]
     partial class Initial
     {

@@ -10,7 +10,7 @@ using PLMS.Repository.Contexts;
 
 namespace PLMS.Repository.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PLMSDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

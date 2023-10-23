@@ -12,7 +12,7 @@
 
 
             var apiAssembly = Assembly.GetExecutingAssembly();
-            var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext));
+            var repoAssembly = Assembly.GetAssembly(typeof(PLMSDbContext));
             var serviceAssembly = Assembly.GetAssembly(typeof(MapProfile));
 
 
