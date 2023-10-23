@@ -21,3 +21,5 @@ global using AutoMapper;
 global using PLMS.Core.DTOs.Product;
 global using PLMS.Core.Entity;
 global using PLMS.Core.DTOs;
+global using AuthIdentity.Core.DTOs;
+global using PLMS.Web;

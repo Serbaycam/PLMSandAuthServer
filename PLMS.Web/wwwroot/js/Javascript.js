@@ -3,6 +3,21 @@
 
 //-kullanım--   onclick="displayInPopup('@Url.Action("_GetAdressDetails","Uretim",new {depoadres = item.depoAdres })',title='Adres: '+ this.value)" value="@item.depoAdres" data-bs-toggle="modal" data-bs-target="#popupModal" --//
 
+function displayAccountPopup(url) {
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        contentType: 'application/html; charset=utf-8',
+        dataType: 'html',
+        success: function (data) {
+            $('#accountModalContent').html(data);
+            $('#accountModal').modal({ backdrop: 'static', keyboard: false, show: true });
+        }
+    });
+
+};
+
 function displayInPopup(url, title) {
 
     $.ajax({

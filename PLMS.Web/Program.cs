@@ -66,7 +66,7 @@ namespace PLMS.Web
 
                 endpoints.MapControllerRoute(
                     name:"default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                    pattern: "{Area=Account}/{controller=Account}/{action=Index}/{id?}"
                     );
             });
 
