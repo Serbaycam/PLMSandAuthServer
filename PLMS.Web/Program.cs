@@ -1,6 +1,3 @@
-using AuthIdentity.Core.Entities;
-using AuthIdentity.Repository.Contexts;
-
 namespace PLMS.Web
 {
     public class Program
@@ -17,8 +14,8 @@ namespace PLMS.Web
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json",optional:false)
-               .AddJsonFile($"appsettings.{env.EnvironmentName}.json",optional:true)
+                .AddJsonFile("appsettings.json", optional: false)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 ;
             builder.Services.AddDbContext<AuthIdentityDbContext>(x =>
             {
@@ -34,14 +31,15 @@ namespace PLMS.Web
                     option.MigrationsAssembly(Assembly.GetAssembly(typeof(PLMSDbContext)).GetName().Name);
                 });
             });
+          
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
 
             builder.Services.AddIdentity<AuthIdentityUser, AuthIdentityRole>().AddEntityFrameworkStores<AuthIdentityDbContext>();
 
-
+            
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -65,7 +63,7 @@ namespace PLMS.Web
                 );
 
                 endpoints.MapControllerRoute(
-                    name:"default",
+                    name: "default",
                     pattern: "{Area=Account}/{controller=Account}/{action=Index}/{id?}"
                     );
             });

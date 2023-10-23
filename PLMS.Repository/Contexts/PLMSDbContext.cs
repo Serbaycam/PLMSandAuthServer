@@ -8,7 +8,6 @@ namespace PLMS.Repository.Contexts
     {
         public PLMSDbContext(DbContextOptions<PLMSDbContext> options) : base(options)
         {
-
         }
 
         DbSet<Category> Categories { get; set; }

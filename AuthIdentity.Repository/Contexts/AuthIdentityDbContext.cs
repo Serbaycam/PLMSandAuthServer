@@ -8,7 +8,6 @@ namespace AuthIdentity.Repository.Contexts
     {
         public AuthIdentityDbContext(DbContextOptions<AuthIdentityDbContext> options):base(options)
         {
-            
         }
     }
 }

@@ -23,3 +23,5 @@ global using PLMS.Core.Entity;
 global using PLMS.Core.DTOs;
 global using AuthIdentity.Core.DTOs;
 global using PLMS.Web;
+global using AuthIdentity.Core.Entities;
+global using AuthIdentity.Repository.Contexts;
