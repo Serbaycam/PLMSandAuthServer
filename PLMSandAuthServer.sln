@@ -15,21 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLMS.Api", "PLMS.Api\PLMS.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PLMS.Caching", "PLMS.Caching\PLMS.Caching.csproj", "{24FCE211-9136-43F3-9159-F3C1D6F2A57E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthIdentity.Core", "AuthIdentity.Core\AuthIdentity.Core.csproj", "{C77D68B6-9FD1-40CC-B15D-58164D06B415}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthIdentity.Core", "AuthIdentity.Core\AuthIdentity.Core.csproj", "{C77D68B6-9FD1-40CC-B15D-58164D06B415}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthIdentity.Service", "AuthIdentity.Service\AuthIdentity.Service.csproj", "{64329D60-9337-4740-8874-B71574B8D314}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthIdentity.Service", "AuthIdentity.Service\AuthIdentity.Service.csproj", "{64329D60-9337-4740-8874-B71574B8D314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthIdentity.Repository", "AuthIdentity.Repository\AuthIdentity.Repository.csproj", "{C7E97E3A-5CA1-4622-8856-F396D37F0B45}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.Api", "AuthJWT.Api\AuthJWT.Api.csproj", "{FF4ED80E-31A5-476E-AFE8-E31E782A078F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.Core", "AuthJWT.Core\AuthJWT.Core.csproj", "{A4B475D2-BB67-4A6C-9E90-46FA0EC0C6A6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.Service", "AuthJWT.Service\AuthJWT.Service.csproj", "{7CCE3FF9-F287-4E82-B0E4-38D217D84248}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.Repository", "AuthJWT.Repository\AuthJWT.Repository.csproj", "{632651DB-D512-47C4-957D-9292E2882533}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthJWT.SharedLibrary", "AuthJWT.SharedLibrary\AuthJWT.SharedLibrary.csproj", "{5549519F-BE8B-4BF9-BDFD-18259C776E8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthIdentity.Repository", "AuthIdentity.Repository\AuthIdentity.Repository.csproj", "{C7E97E3A-5CA1-4622-8856-F396D37F0B45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,26 +63,6 @@ Global
 		{C7E97E3A-5CA1-4622-8856-F396D37F0B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7E97E3A-5CA1-4622-8856-F396D37F0B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7E97E3A-5CA1-4622-8856-F396D37F0B45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF4ED80E-31A5-476E-AFE8-E31E782A078F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF4ED80E-31A5-476E-AFE8-E31E782A078F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF4ED80E-31A5-476E-AFE8-E31E782A078F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF4ED80E-31A5-476E-AFE8-E31E782A078F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4B475D2-BB67-4A6C-9E90-46FA0EC0C6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4B475D2-BB67-4A6C-9E90-46FA0EC0C6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4B475D2-BB67-4A6C-9E90-46FA0EC0C6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4B475D2-BB67-4A6C-9E90-46FA0EC0C6A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CCE3FF9-F287-4E82-B0E4-38D217D84248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CCE3FF9-F287-4E82-B0E4-38D217D84248}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CCE3FF9-F287-4E82-B0E4-38D217D84248}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CCE3FF9-F287-4E82-B0E4-38D217D84248}.Release|Any CPU.Build.0 = Release|Any CPU
-		{632651DB-D512-47C4-957D-9292E2882533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{632651DB-D512-47C4-957D-9292E2882533}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{632651DB-D512-47C4-957D-9292E2882533}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{632651DB-D512-47C4-957D-9292E2882533}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5549519F-BE8B-4BF9-BDFD-18259C776E8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
