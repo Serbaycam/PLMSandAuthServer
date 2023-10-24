@@ -3,7 +3,7 @@
 namespace PLMS.Web.Areas.Account.Controllers
 {
     [Area("Account")]
-
+    [Route("Account/[controller]/[action]")]
     public class AccountController : Controller
     {
 

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+
 namespace PLMS.Web
 {
     public class Program
@@ -59,13 +61,13 @@ namespace PLMS.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area}/{controller}/{action}/{id?}"
-                );
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{Area=Account}/{controller=Account}/{action=Index}/{id?}"
+                endpoints.MapAreaControllerRoute(
+                    name: "areas",
+                    areaName: "areas",
+                    pattern: "{area}/{controller=Account}/{action=Index}/{id?}"
                     );
             });
 

@@ -1,4 +1,6 @@
-﻿namespace PLMS.Web.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace PLMS.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,9 +14,9 @@
             this.mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        [AllowAnonymous]
+        public IActionResult Index()
         {
-            var result = mapper.Map<IEnumerable<ProductDto>>(await genericService.GetAllAsync());
             return View();
         }
 
