@@ -13,14 +13,16 @@ namespace PLMS.Web.Areas.Account.Controllers
             return View();
         }
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Login()
         {
-            return PartialView();
+            return PartialView(new AuthIdentityUserLoginDto());
         }
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Register()
         {
-            return PartialView();
+            return PartialView(new AuthIdentityUserRegisterDto());
         }
     }
 }

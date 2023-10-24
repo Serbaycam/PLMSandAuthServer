@@ -4,6 +4,10 @@ namespace AuthIdentity.Core.DTOs
 {
     public class AuthIdentityUserLoginDto
     {
+        public AuthIdentityUserLoginDto()
+        {
+            
+        }
         public AuthIdentityUserLoginDto(string email, string password)
         {
             Email = email;

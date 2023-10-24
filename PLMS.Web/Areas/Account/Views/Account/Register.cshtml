@@ -15,24 +15,24 @@
 
                             <form class="mx-1 mx-md-4" asp-area="Account" asp-controller="Account" asp-action="Register" method="post">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                    <label for="floatingInput">Name</label>
+                                    <input asp-for="Name" type="text" class="form-control" id="registerNameInput" placeholder="Name">
+                                    <label for="registerNameInput">Name</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                    <label for="floatingInput">Surname</label>
+                                    <input asp-for="SurName" type="text" class="form-control" id="registerSurnameInput" placeholder="Surname">
+                                    <label for="registerSurnameInput">Surname</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                    <label for="floatingInput">Email address</label>
+                                    <input asp-for="Email" type="email" class="form-control" id="registerEmailInput" placeholder="name@example.com">
+                                    <label for="registerEmailInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
+                                    <input asp-for="Password" type="password" class="form-control" id="registerPasswordInput" placeholder="Password">
+                                    <label for="registerPasswordInput">Password</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                    <label for="floatingPassword">Password Again</label>
+                                    <input asp-for="PasswordMatch" type="password" class="form-control" id="registerPasswordMatchInput" placeholder="Password">
+                                    <label for="registerPasswordMatchInput">Password Again</label>
                                 </div>
 
                                 <div class="d-flex justify-content-center mx-4 mt-3">
