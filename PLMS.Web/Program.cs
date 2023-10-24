@@ -11,6 +11,7 @@ namespace PLMS.Web
 
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
+            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)

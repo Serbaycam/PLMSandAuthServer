@@ -1,3 +1,6 @@
+using AuthIdentity.Core.Entities;
+using AuthIdentity.Repository.Contexts;
+
 namespace PLMS.Api
 {
     public class Program
@@ -19,12 +22,20 @@ namespace PLMS.Api
 
             builder.Services.AddScoped(typeof(NotFoundFilter<,>));
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
+            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false)
                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 ;
+            builder.Services.AddDbContext<AuthIdentityDbContext>(x =>
+            {
+                x.UseSqlServer(builder.Configuration.GetConnectionString("AuthIdentityConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AuthIdentityDbContext)).GetName().Name);
+                });
+            });
             builder.Services.AddDbContext<PLMSDbContext>(x =>
             {
                 x.UseSqlServer(builder.Configuration.GetConnectionString("PLMSConnection"), option =>
@@ -35,6 +46,7 @@ namespace PLMS.Api
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
+            builder.Services.AddIdentity<AuthIdentityUser, AuthIdentityRole>().AddEntityFrameworkStores<AuthIdentityDbContext>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
