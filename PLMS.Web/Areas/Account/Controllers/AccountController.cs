@@ -6,8 +6,6 @@ namespace PLMS.Web.Areas.Account.Controllers
     [Route("Account/[controller]/[action]")]
     public class AccountController : Controller
     {
-
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -16,13 +14,13 @@ namespace PLMS.Web.Areas.Account.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return PartialView(new AuthIdentityUserLoginDto());
+            return View(new AuthIdentityUserLoginDto());
         }
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
-            return PartialView(new AuthIdentityUserRegisterDto());
+            return View(new AuthIdentityUserRegisterDto());
         }
     }
 }
