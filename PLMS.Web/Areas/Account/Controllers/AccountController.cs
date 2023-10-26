@@ -19,9 +19,9 @@ namespace PLMS.Web.Areas.Account.Controllers
 
 		private string userName => User.Identity.Name;
 
-		public async Task<IActionResult> Index()
+		public IActionResult Index()
 		{
-			return View(await _identityMemberService.GetUserDtoByUserNameAsync(userName));
+			return View();
 		}
 
 
@@ -32,6 +32,7 @@ namespace PLMS.Web.Areas.Account.Controllers
 		{
 			return View(new AuthIdentityUserLoginDto());
 		}
+
 		[AllowAnonymous]
 		[HttpPost]
 		public IActionResult Login(AuthIdentityUserLoginDto authIdentityUserLoginDto)
@@ -60,6 +61,7 @@ namespace PLMS.Web.Areas.Account.Controllers
 				}
 				return View(authIdentityUserRegisterDto);
 			}
+			ViewBag.Message = "Register completed successfuly";
 			return RedirectToAction(nameof(Login));
 		}
 
