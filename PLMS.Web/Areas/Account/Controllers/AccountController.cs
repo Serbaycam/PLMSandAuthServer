@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-namespace PLMS.Web.Areas.Account.Controllers
+﻿namespace PLMS.Web.Areas.Account.Controllers
 {
 	[Area("Account")]
 	[Route("Account/[controller]/[action]")]
@@ -10,14 +6,16 @@ namespace PLMS.Web.Areas.Account.Controllers
 	{
 		private readonly IAuthIdentityMemberService _identityMemberService;
 		private readonly IMapper _mapper;
+        private readonly IToastNotification _toastNotification;
 
-		public AccountController(IMapper mapper, IAuthIdentityMemberService identityMemberService)
-		{
-			_mapper = mapper;
-			_identityMemberService = identityMemberService;
-		}
+        public AccountController(IMapper mapper, IAuthIdentityMemberService identityMemberService, IToastNotification toastNotification)
+        {
+            _mapper = mapper;
+            _identityMemberService = identityMemberService;
+            _toastNotification = toastNotification;
+        }
 
-		private string userName => User.Identity.Name;
+        private string userName => User.Identity.Name;
 
 		public IActionResult Index()
 		{
@@ -58,10 +56,11 @@ namespace PLMS.Web.Areas.Account.Controllers
 				foreach (IdentityError error in errors)
 				{
 					ModelState.AddModelError(String.Empty,error.Description);
-				}
+                    _toastNotification.AddErrorToastMessage(error.Description);
+                }
 				return View();
 			}
-			TempData["Message"] = "Register completed successfuly";
+            _toastNotification.AddSuccessToastMessage("Register completed successfuly");
 			return RedirectToAction(nameof(Login));
 		}
 

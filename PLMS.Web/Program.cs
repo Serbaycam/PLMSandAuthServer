@@ -9,7 +9,11 @@ namespace PLMS.Web
             // Add services to the container.
             builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
             builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
-
+            builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
+            {
+                ProgressBar = true,
+                Timeout = 10000
+            });
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
@@ -56,7 +60,9 @@ namespace PLMS.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseNToastNotify();
 
+            app.MapRazorPages();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

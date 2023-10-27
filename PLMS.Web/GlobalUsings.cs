@@ -34,3 +34,7 @@ global using AuthIdentity.Repository.UnitOfWork;
 global using AuthIdentity.Service.Services;
 global using AuthIdentity.Service.Validations;
 global using Microsoft.AspNetCore.Builder;
+global using NToastNotify;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Mvc.ModelBinding;

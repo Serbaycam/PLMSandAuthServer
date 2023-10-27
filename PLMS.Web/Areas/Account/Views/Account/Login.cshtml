@@ -9,18 +9,9 @@
         <div class="col-xl-5 col-lg-7 col-md-9 col-12">
             <div class="card text-black" style="border-radius: 25px; border-top:#0d6efd 5px solid;">
                 <div class="card-body p-5">
-                    @if (TempData["Message"] != null)
-                    {
-                        <div class="alert alert-success d-flex align-items-center" role="alert">
-
-           
-                                @TempData["Message"]
-                 
-                        </div>
-                    }
                     <div class="row justify-content-center">
                         <div class="col-12">
-
+                            <div asp-validation-summary="ModelOnly" class="alert alert-primary"></div>
                             <p class="text-center h2 fw-bold mb-5 mx-4">Login</p>
 
                             <form style="width:100%;" class="mx-4 px-5" asp-area="Account" asp-controller="Account" asp-action="Login" method="post">

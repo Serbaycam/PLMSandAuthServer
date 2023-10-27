@@ -13,5 +13,6 @@
     <partial name="Partial/_ScriptsPartial" />
     <partial name="_ValidationScriptsPartial" />
     @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
 </body>
 </html>
