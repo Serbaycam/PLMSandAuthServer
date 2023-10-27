@@ -55,7 +55,6 @@
 			{
 				foreach (IdentityError error in errors)
 				{
-					ModelState.AddModelError(String.Empty,error.Description);
                     _toastNotification.AddErrorToastMessage(error.Description);
                 }
 				return View();
