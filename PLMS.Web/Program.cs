@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-
 namespace PLMS.Web
 {
     public class Program
@@ -10,6 +8,7 @@ namespace PLMS.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
+            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
 
 
             builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));

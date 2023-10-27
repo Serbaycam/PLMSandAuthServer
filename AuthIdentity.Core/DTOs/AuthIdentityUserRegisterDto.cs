@@ -24,6 +24,6 @@ namespace AuthIdentity.Core.DTOs
 
         [Compare(nameof(Password))]
         public string PasswordMatch { get; set; }
-        public string UserName => Name+" "+Surname;
+        public string UserName => Email;
     }
 }

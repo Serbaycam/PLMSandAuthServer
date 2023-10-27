@@ -11,42 +11,49 @@
                         <div class="col-12">
 
                             <p class="text-center h2 fw-bold mb-5 mx-4">Register</p>
+                            
 
                             <form style="width:100%;" class="mx-4 px-5" asp-area="Account" asp-controller="Account" asp-action="Register" method="post">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
                                     <div class="form-floating">
                                         <input asp-for="Name" type="text" class="form-control" id="registerNameInput" placeholder="Name">
-                                        <label for="registerNameInput">Name</label>
+                                        <label asp-for="Name" for="registerNameInput"></label>
+                                       
                                     </div>
+                                    <span class="text-danger" asp-validation-for="Name"></span>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
                                     <div class="form-floating">
                                         <input asp-for="Surname" type="text" class="form-control" id="registerSurnameInput" placeholder="Surname">
-                                        <label for="registerSurnameInput">Surname</label>
+                                        <label asp-for="Surname" for="registerSurnameInput"></label>
                                     </div>
+                                        <span class="text-danger" asp-validation-for="Surname"></span>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                     <div class="form-floating">
                                         <input asp-for="Email" type="email" class="form-control" id="registerEmailInput" placeholder="name@example.com">
-                                        <label for="registerEmailInput">Email address</label>
+                                        <label asp-for="Email" for="registerEmailInput"></label>
                                     </div>
+                                        <span class="text-danger" asp-validation-for="Email"></span>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                     <div class="form-floating">
                                         <input asp-for="Password" type="password" class="form-control" id="registerPasswordInput" placeholder="Password">
-                                        <label for="registerPasswordInput">Password</label>
+                                        <label asp-for="Password" for="registerPasswordInput"></label>
                                     </div>
+                                        <span class="text-danger" asp-validation-for="Password"></span>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                     <div class="form-floating">
                                         <input asp-for="PasswordMatch" type="password" class="form-control" id="registerPasswordMatchInput" placeholder="Password">
-                                        <label for="registerPasswordMatchInput">Re-Enter Password</label>
+                                        <label asp-for="PasswordMatch" for="registerPasswordMatchInput"></label>
                                     </div>
+                                        <span class="text-danger" asp-validation-for="PasswordMatch"></span>
                                 </div>
                                 <div class="input-group mb-3 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary btn-lg me-5">Register</button>

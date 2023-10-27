@@ -1,6 +1,3 @@
-using AuthIdentity.Core.Entities;
-using AuthIdentity.Repository.Contexts;
-
 namespace PLMS.Api
 {
     public class Program
@@ -11,7 +8,8 @@ namespace PLMS.Api
 
             // Add services to the container.
 
-            builder.Services.AddControllers(opt => opt.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
+            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
+            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
             builder.Services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;

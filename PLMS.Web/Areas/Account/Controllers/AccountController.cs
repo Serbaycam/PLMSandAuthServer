@@ -30,7 +30,7 @@ namespace PLMS.Web.Areas.Account.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
-			return View(new AuthIdentityUserLoginDto());
+            return View(new AuthIdentityUserLoginDto());
 		}
 
 		[AllowAnonymous]
@@ -59,9 +59,9 @@ namespace PLMS.Web.Areas.Account.Controllers
 				{
 					ModelState.AddModelError(String.Empty,error.Description);
 				}
-				return View(authIdentityUserRegisterDto);
+				return View();
 			}
-			ViewBag.Message = "Register completed successfuly";
+			TempData["Message"] = "Register completed successfuly";
 			return RedirectToAction(nameof(Login));
 		}
 

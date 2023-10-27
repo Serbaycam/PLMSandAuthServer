@@ -32,3 +32,5 @@ global using AuthIdentity.Core.UnitOfWork;
 global using AuthIdentity.Repository.Repositories;
 global using AuthIdentity.Repository.UnitOfWork;
 global using AuthIdentity.Service.Services;
+global using AuthIdentity.Service.Validations;
+global using Microsoft.AspNetCore.Builder;
