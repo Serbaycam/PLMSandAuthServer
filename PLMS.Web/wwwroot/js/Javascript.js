@@ -1,4 +1,382 @@
-﻿//#region DisplayInPopUp Functions
+﻿$(() => {
+
+
+    VirtualSelect.init({
+        ele: '.virtualMultiple',
+        multiple: true, search: true,
+        autoSelectFirstOption: false,
+        selectAllOnlyVisible: true,
+    });
+    VirtualSelect.init({
+        placeholder: 'Select',
+        ariaLabelText: 'Select',
+        ele: '.virtualSingle',
+        autoSelectFirstOption: false,
+        multiple: true, search: true,
+        selectAllOnlyVisible: true,
+    });
+
+    $('.dataTableJS').DataTable({
+        responsive: true,
+        autoWidth: true,
+        colReorder: true,
+        pageLength: 5,
+        dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-md-5'i><'col-md-7'p>>",
+        buttons: [
+
+
+            {
+                extend: 'collection',
+                text: 'Export',
+                className: 'btn bg-light text-black',
+                buttons: [
+                    {
+                        orientation: 'landscape',
+                        pageSize: 'A4',
+                        extend: 'excelHtml5',
+                        text: '<i class="far fa-file-excel" data-toggle="tooltip" title="Export To Excel"></i> Excel',
+                        //className: 'btn btn-secondary rounded',
+                        exportOptions: {
+                            stripHtml: true
+                        }
+                    },
+                    //{
+                    //    orientation: 'landscape',
+                    //    pageSize: 'A4',
+                    //    extend: 'csvHtml5',
+                    //    className: 'btn btn-secondary rounded',
+                    //    text: '<i class="fas fa-file-csv" data-toggle="tooltip" title="Export To Csv"></i> Csv',
+                    //    exportOptions: {
+                    //        stripHtml: true
+                    //    }
+                    //},
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="far fa-file-pdf" data-toggle="tooltip" title="Export To Pdf"></i> Pdf',
+                        orientation: 'landscape',
+                        //className: 'btn btn-secondary rounded',
+                        pageSize: 'A4'
+                    },
+                    //{
+                    //    extend: 'print',
+                    //    text: '<i class="fas fa-print" data-toggle="tooltip" title="Print"></i> Yazdır',
+                    //    orientation: 'landscape',
+                    //    className: 'btn btn-secondary rounded',
+                    //    pageSize: 'A4'
+                    //}
+
+                ]
+            }
+        ],
+        //buttons: [
+
+        //    {
+        //        orientation: 'landscape',
+        //        pageSize: 'A4',
+        //        extend: 'excelHtml5',
+        //        text: '<i class="far fa-file-excel" data-toggle="tooltip" title="Export To Excel"></i>',
+        //        className: 'btn btn-secondary rounded',
+        //        exportOptions: {
+        //            stripHtml: true
+        //        }
+        //    },
+        //    {
+        //        orientation: 'landscape',
+        //        pageSize: 'A4',
+        //        extend: 'csvHtml5',
+        //        className: 'btn btn-secondary ml-2 rounded',
+        //        text: '<i class="fas fa-file-csv" data-toggle="tooltip" title="Export To Csv"></i>',
+        //        exportOptions: {
+        //            stripHtml: true
+        //        }
+        //    },
+        //    {
+        //        extend: 'pdfHtml5',
+        //        text: '<i class="far fa-file-pdf" data-toggle="tooltip" title="Export To Pdf"></i>',
+        //        orientation: 'landscape',
+        //        className: 'btn btn-secondary ml-2 rounded',
+        //        pageSize: 'A4'
+        //    },
+        //    {
+        //        extend: 'print',
+        //        text: '<i class="fas fa-print" data-toggle="tooltip" title="Print"></i>',
+        //        orientation: 'landscape',
+        //        className: 'btn btn-secondary ml-2 rounded',
+        //        pageSize: 'A4'
+        //    }
+        //],
+        //language: {
+        //    "emptyTable": "Tabloda herhangi bir veri mevcut değil",
+        //    "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+        //    "infoEmpty": "Kayıt yok",
+        //    "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+        //    "infoThousands": ".",
+        //    "lengthMenu": "Sayfada _MENU_ kayıt göster",
+        //    "loadingRecords": "Yükleniyor...",
+        //    "processing": "İşleniyor...",
+        //    "search": "Ara:",
+        //    "zeroRecords": "Eşleşen kayıt bulunamadı",
+        //    "paginate": {
+        //        "first": "İlk",
+        //        "last": "Son",
+        //        "next": "Sonraki",
+        //        "previous": "Önceki"
+        //    },
+        //    "aria": {
+        //        "sortAscending": ": artan sütun sıralamasını aktifleştir",
+        //        "sortDescending": ": azalan sütun sıralamasını aktifleştir"
+        //    },
+        //    "select": {
+        //        "rows": {
+        //            "_": "%d kayıt seçildi",
+        //            "1": "1 kayıt seçildi"
+        //        },
+        //        "cells": {
+        //            "1": "1 hücre seçildi",
+        //            "_": "%d hücre seçildi"
+        //        },
+        //        "columns": {
+        //            "1": "1 sütun seçildi",
+        //            "_": "%d sütun seçildi"
+        //        }
+        //    },
+        //    "autoFill": {
+        //        "cancel": "İptal",
+        //        "fillHorizontal": "Hücreleri yatay olarak doldur",
+        //        "fillVertical": "Hücreleri dikey olarak doldur",
+        //        "fill": "Bütün hücreleri <i>%d<\/i> ile doldur"
+        //    },
+        //    "buttons": {
+        //        "collection": "Koleksiyon <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+        //        "colvis": "Sütun görünürlüğü",
+        //        "colvisRestore": "Görünürlüğü eski haline getir",
+        //        "copySuccess": {
+        //            "1": "1 satır panoya kopyalandı",
+        //            "_": "%ds satır panoya kopyalandı"
+        //        },
+        //        "copyTitle": "Panoya kopyala",
+        //        "csv": "CSV",
+        //        "excel": "Excel",
+        //        "pageLength": {
+        //            "-1": "Bütün satırları göster",
+        //            "_": "%d satır göster"
+        //        },
+        //        "pdf": "PDF",
+        //        "print": "Yazdır",
+        //        "copy": "Kopyala",
+        //        "copyKeys": "Tablodaki veriyi kopyalamak için CTRL veya u2318 + C tuşlarına basınız. İptal etmek için bu mesaja tıklayın veya escape tuşuna basın.",
+        //        "createState": "Şuanki Görünümü Kaydet",
+        //        "removeAllStates": "Tüm Görünümleri Sil",
+        //        "removeState": "Aktif Görünümü Sil",
+        //        "renameState": "Aktif Görünümün Adını Değiştir",
+        //        "savedStates": "Kaydedilmiş Görünümler",
+        //        "stateRestore": "Görünüm -&gt; %d",
+        //        "updateState": "Aktif Görünümün Güncelle"
+        //    },
+        //    "searchBuilder": {
+        //        "add": "Koşul Ekle",
+        //        "button": {
+        //            "0": "Arama Oluşturucu",
+        //            "_": "Arama Oluşturucu (%d)"
+        //        },
+        //        "condition": "Koşul",
+        //        "conditions": {
+        //            "date": {
+        //                "after": "Sonra",
+        //                "before": "Önce",
+        //                "between": "Arasında",
+        //                "empty": "Boş",
+        //                "equals": "Eşittir",
+        //                "not": "Değildir",
+        //                "notBetween": "Dışında",
+        //                "notEmpty": "Dolu"
+        //            },
+        //            "number": {
+        //                "between": "Arasında",
+        //                "empty": "Boş",
+        //                "equals": "Eşittir",
+        //                "gt": "Büyüktür",
+        //                "gte": "Büyük eşittir",
+        //                "lt": "Küçüktür",
+        //                "lte": "Küçük eşittir",
+        //                "not": "Değildir",
+        //                "notBetween": "Dışında",
+        //                "notEmpty": "Dolu"
+        //            },
+        //            "string": {
+        //                "contains": "İçerir",
+        //                "empty": "Boş",
+        //                "endsWith": "İle biter",
+        //                "equals": "Eşittir",
+        //                "not": "Değildir",
+        //                "notEmpty": "Dolu",
+        //                "startsWith": "İle başlar",
+        //                "notContains": "İçermeyen",
+        //                "notStartsWith": "Başlamayan",
+        //                "notEndsWith": "Bitmeyen"
+        //            },
+        //            "array": {
+        //                "contains": "İçerir",
+        //                "empty": "Boş",
+        //                "equals": "Eşittir",
+        //                "not": "Değildir",
+        //                "notEmpty": "Dolu",
+        //                "without": "Hariç"
+        //            }
+        //        },
+        //        "data": "Veri",
+        //        "deleteTitle": "Filtreleme kuralını silin",
+        //        "leftTitle": "Kriteri dışarı çıkart",
+        //        "logicAnd": "ve",
+        //        "logicOr": "veya",
+        //        "rightTitle": "Kriteri içeri al",
+        //        "title": {
+        //            "0": "Arama Oluşturucu",
+        //            "_": "Arama Oluşturucu (%d)"
+        //        },
+        //        "value": "Değer",
+        //        "clearAll": "Filtreleri Temizle"
+        //    },
+        //    "searchPanes": {
+        //        "clearMessage": "Hepsini Temizle",
+        //        "collapse": {
+        //            "0": "Arama Bölmesi",
+        //            "_": "Arama Bölmesi (%d)"
+        //        },
+        //        "count": "{total}",
+        //        "countFiltered": "{shown}\/{total}",
+        //        "emptyPanes": "Arama Bölmesi yok",
+        //        "loadMessage": "Arama Bölmeleri yükleniyor ...",
+        //        "title": "Etkin filtreler - %d",
+        //        "showMessage": "Tümünü Göster",
+        //        "collapseMessage": "Tümünü Gizle"
+        //    },
+        //    "thousands": ".",
+        //    "datetime": {
+        //        "amPm": [
+        //            "öö",
+        //            "ös"
+        //        ],
+        //        "hours": "Saat",
+        //        "minutes": "Dakika",
+        //        "next": "Sonraki",
+        //        "previous": "Önceki",
+        //        "seconds": "Saniye",
+        //        "unknown": "Bilinmeyen",
+        //        "weekdays": {
+        //            "6": "Paz",
+        //            "5": "Cmt",
+        //            "4": "Cum",
+        //            "3": "Per",
+        //            "2": "Çar",
+        //            "1": "Sal",
+        //            "0": "Pzt"
+        //        },
+        //        "months": {
+        //            "9": "Ekim",
+        //            "8": "Eylül",
+        //            "7": "Ağustos",
+        //            "6": "Temmuz",
+        //            "5": "Haziran",
+        //            "4": "Mayıs",
+        //            "3": "Nisan",
+        //            "2": "Mart",
+        //            "11": "Aralık",
+        //            "10": "Kasım",
+        //            "1": "Şubat",
+        //            "0": "Ocak"
+        //        }
+        //    },
+        //    "decimal": ",",
+        //    "editor": {
+        //        "close": "Kapat",
+        //        "create": {
+        //            "button": "Yeni",
+        //            "submit": "Kaydet",
+        //            "title": "Yeni kayıt oluştur"
+        //        },
+        //        "edit": {
+        //            "button": "Düzenle",
+        //            "submit": "Güncelle",
+        //            "title": "Kaydı düzenle"
+        //        },
+        //        "error": {
+        //            "system": "Bir sistem hatası oluştu (Ayrıntılı bilgi)"
+        //        },
+        //        "multi": {
+        //            "info": "Seçili kayıtlar bu alanda farklı değerler içeriyor. Seçili kayıtların hepsinde bu alana aynı değeri atamak için buraya tıklayın; aksi halde her kayıt bu alanda kendi değerini koruyacak.",
+        //            "noMulti": "Bu alan bir grup olarak değil ancak tekil olarak düzenlenebilir.",
+        //            "restore": "Değişiklikleri geri al",
+        //            "title": "Çoklu değer"
+        //        },
+        //        "remove": {
+        //            "button": "Sil",
+        //            "confirm": {
+        //                "_": "%d adet kaydı silmek istediğinize emin misiniz?",
+        //                "1": "Bu kaydı silmek istediğinizden emin misiniz?"
+        //            },
+        //            "submit": "Sil",
+        //            "title": "Kayıtları sil"
+        //        }
+        //    },
+        //    "stateRestore": {
+        //        "creationModal": {
+        //            "button": "Kaydet",
+        //            "columns": {
+        //                "search": "Kolon Araması",
+        //                "visible": "Kolon Görünümü"
+        //            },
+        //            "name": "Görünüm İsmi",
+        //            "order": "Sıralama",
+        //            "paging": "Sayfalama",
+        //            "scroller": "Kaydırma (Scrool)",
+        //            "search": "Arama",
+        //            "searchBuilder": "Arama Oluşturucu",
+        //            "select": "Seçimler",
+        //            "title": "Yeni Görünüm Oluştur",
+        //            "toggleLabel": "Kaydedilecek Olanlar"
+        //        },
+        //        "duplicateError": "Bu Görünüm Daha Önce Tanımlanmış",
+        //        "emptyError": "Görünüm Boş Olamaz",
+        //        "emptyStates": "Herhangi Bir Görünüm Yok",
+        //        "removeJoiner": "ve",
+        //        "removeSubmit": "Sil",
+        //        "removeTitle": "Görünüm Sil",
+        //        "renameButton": "Değiştir",
+        //        "renameLabel": "Görünüme Yeni İsim Ver -&gt; %s:",
+        //        "renameTitle": "Görünüm İsmini Değiştir",
+        //        "removeConfirm": "Görünümü silmek istediğinize emin misiniz?",
+        //        "removeError": "Görünüm silinemedi"
+        //    }
+        //},
+        //        "footerCallback": function (row, data, start, end, display) {
+        //            var api = this.api(), data;
+
+        //            // converting to interger to find total
+        //            var intVal = function (i) {
+        //                return typeof i === 'string' ?
+        //                    i.replace(/[\$,]/g, '') * 1 :
+        //                    typeof i === 'number' ?
+        //                        i : 0;
+        //            };
+
+        //            // computing column Total of the complete result
+        //            var Total = api
+        //                .column(2)
+        //                .data()
+        //                .reduce(function (a, b) {
+        //                    return intVal(a) + intVal(b);
+        //                }, 0);
+        //            $(api.column(1).footer()).html('Total');
+        //            $(api.column(2).footer()).html(Total);
+        //        },
+    });
+
+});
+
+//#region DisplayInPopUp Functions
 
 //onclick="displayInPopup('@Url.Action("_GetAdressDetails","Uretim",new {depoadres = item.depoAdres })',title='Adres: '+ this.value)" data-bs-toggle="modal" data-bs-target="#popupModal" --//
 function displayAccountPopup(url) {
@@ -399,365 +777,7 @@ function DataTableJS(id, title) {
     });
 };
 
-$(document).ready(function () {
-    $('.dataTableJS').DataTable({
-        responsive: true,
-        autoWidth: true,
-        colReorder: true,
-        pageLength: 5,
-        dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-md-5'i><'col-md-7'p>>",
-        buttons: [
 
-
-            {
-                extend: 'collection',
-                text: 'Export',
-                className: 'btn bg-light text-black',
-                buttons: [
-                    {
-                        orientation: 'landscape',
-                        pageSize: 'A4',
-                        extend: 'excelHtml5',
-                        text: '<i class="far fa-file-excel" data-toggle="tooltip" title="Export To Excel"></i> Excel',
-                        //className: 'btn btn-secondary rounded',
-                        exportOptions: {
-                            stripHtml: true
-                        }
-                    },
-                    //{
-                    //    orientation: 'landscape',
-                    //    pageSize: 'A4',
-                    //    extend: 'csvHtml5',
-                    //    className: 'btn btn-secondary rounded',
-                    //    text: '<i class="fas fa-file-csv" data-toggle="tooltip" title="Export To Csv"></i> Csv',
-                    //    exportOptions: {
-                    //        stripHtml: true
-                    //    }
-                    //},
-                    {
-                        extend: 'pdfHtml5',
-                        text: '<i class="far fa-file-pdf" data-toggle="tooltip" title="Export To Pdf"></i> Pdf',
-                        orientation: 'landscape',
-                        //className: 'btn btn-secondary rounded',
-                        pageSize: 'A4'
-                    },
-                    //{
-                    //    extend: 'print',
-                    //    text: '<i class="fas fa-print" data-toggle="tooltip" title="Print"></i> Yazdır',
-                    //    orientation: 'landscape',
-                    //    className: 'btn btn-secondary rounded',
-                    //    pageSize: 'A4'
-                    //}
-
-                ]
-            }
-        ],
-        //buttons: [
-
-        //    {
-        //        orientation: 'landscape',
-        //        pageSize: 'A4',
-        //        extend: 'excelHtml5',
-        //        text: '<i class="far fa-file-excel" data-toggle="tooltip" title="Export To Excel"></i>',
-        //        className: 'btn btn-secondary rounded',
-        //        exportOptions: {
-        //            stripHtml: true
-        //        }
-        //    },
-        //    {
-        //        orientation: 'landscape',
-        //        pageSize: 'A4',
-        //        extend: 'csvHtml5',
-        //        className: 'btn btn-secondary ml-2 rounded',
-        //        text: '<i class="fas fa-file-csv" data-toggle="tooltip" title="Export To Csv"></i>',
-        //        exportOptions: {
-        //            stripHtml: true
-        //        }
-        //    },
-        //    {
-        //        extend: 'pdfHtml5',
-        //        text: '<i class="far fa-file-pdf" data-toggle="tooltip" title="Export To Pdf"></i>',
-        //        orientation: 'landscape',
-        //        className: 'btn btn-secondary ml-2 rounded',
-        //        pageSize: 'A4'
-        //    },
-        //    {
-        //        extend: 'print',
-        //        text: '<i class="fas fa-print" data-toggle="tooltip" title="Print"></i>',
-        //        orientation: 'landscape',
-        //        className: 'btn btn-secondary ml-2 rounded',
-        //        pageSize: 'A4'
-        //    }
-        //],
-        //language: {
-        //    "emptyTable": "Tabloda herhangi bir veri mevcut değil",
-        //    "info": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
-        //    "infoEmpty": "Kayıt yok",
-        //    "infoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
-        //    "infoThousands": ".",
-        //    "lengthMenu": "Sayfada _MENU_ kayıt göster",
-        //    "loadingRecords": "Yükleniyor...",
-        //    "processing": "İşleniyor...",
-        //    "search": "Ara:",
-        //    "zeroRecords": "Eşleşen kayıt bulunamadı",
-        //    "paginate": {
-        //        "first": "İlk",
-        //        "last": "Son",
-        //        "next": "Sonraki",
-        //        "previous": "Önceki"
-        //    },
-        //    "aria": {
-        //        "sortAscending": ": artan sütun sıralamasını aktifleştir",
-        //        "sortDescending": ": azalan sütun sıralamasını aktifleştir"
-        //    },
-        //    "select": {
-        //        "rows": {
-        //            "_": "%d kayıt seçildi",
-        //            "1": "1 kayıt seçildi"
-        //        },
-        //        "cells": {
-        //            "1": "1 hücre seçildi",
-        //            "_": "%d hücre seçildi"
-        //        },
-        //        "columns": {
-        //            "1": "1 sütun seçildi",
-        //            "_": "%d sütun seçildi"
-        //        }
-        //    },
-        //    "autoFill": {
-        //        "cancel": "İptal",
-        //        "fillHorizontal": "Hücreleri yatay olarak doldur",
-        //        "fillVertical": "Hücreleri dikey olarak doldur",
-        //        "fill": "Bütün hücreleri <i>%d<\/i> ile doldur"
-        //    },
-        //    "buttons": {
-        //        "collection": "Koleksiyon <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-        //        "colvis": "Sütun görünürlüğü",
-        //        "colvisRestore": "Görünürlüğü eski haline getir",
-        //        "copySuccess": {
-        //            "1": "1 satır panoya kopyalandı",
-        //            "_": "%ds satır panoya kopyalandı"
-        //        },
-        //        "copyTitle": "Panoya kopyala",
-        //        "csv": "CSV",
-        //        "excel": "Excel",
-        //        "pageLength": {
-        //            "-1": "Bütün satırları göster",
-        //            "_": "%d satır göster"
-        //        },
-        //        "pdf": "PDF",
-        //        "print": "Yazdır",
-        //        "copy": "Kopyala",
-        //        "copyKeys": "Tablodaki veriyi kopyalamak için CTRL veya u2318 + C tuşlarına basınız. İptal etmek için bu mesaja tıklayın veya escape tuşuna basın.",
-        //        "createState": "Şuanki Görünümü Kaydet",
-        //        "removeAllStates": "Tüm Görünümleri Sil",
-        //        "removeState": "Aktif Görünümü Sil",
-        //        "renameState": "Aktif Görünümün Adını Değiştir",
-        //        "savedStates": "Kaydedilmiş Görünümler",
-        //        "stateRestore": "Görünüm -&gt; %d",
-        //        "updateState": "Aktif Görünümün Güncelle"
-        //    },
-        //    "searchBuilder": {
-        //        "add": "Koşul Ekle",
-        //        "button": {
-        //            "0": "Arama Oluşturucu",
-        //            "_": "Arama Oluşturucu (%d)"
-        //        },
-        //        "condition": "Koşul",
-        //        "conditions": {
-        //            "date": {
-        //                "after": "Sonra",
-        //                "before": "Önce",
-        //                "between": "Arasında",
-        //                "empty": "Boş",
-        //                "equals": "Eşittir",
-        //                "not": "Değildir",
-        //                "notBetween": "Dışında",
-        //                "notEmpty": "Dolu"
-        //            },
-        //            "number": {
-        //                "between": "Arasında",
-        //                "empty": "Boş",
-        //                "equals": "Eşittir",
-        //                "gt": "Büyüktür",
-        //                "gte": "Büyük eşittir",
-        //                "lt": "Küçüktür",
-        //                "lte": "Küçük eşittir",
-        //                "not": "Değildir",
-        //                "notBetween": "Dışında",
-        //                "notEmpty": "Dolu"
-        //            },
-        //            "string": {
-        //                "contains": "İçerir",
-        //                "empty": "Boş",
-        //                "endsWith": "İle biter",
-        //                "equals": "Eşittir",
-        //                "not": "Değildir",
-        //                "notEmpty": "Dolu",
-        //                "startsWith": "İle başlar",
-        //                "notContains": "İçermeyen",
-        //                "notStartsWith": "Başlamayan",
-        //                "notEndsWith": "Bitmeyen"
-        //            },
-        //            "array": {
-        //                "contains": "İçerir",
-        //                "empty": "Boş",
-        //                "equals": "Eşittir",
-        //                "not": "Değildir",
-        //                "notEmpty": "Dolu",
-        //                "without": "Hariç"
-        //            }
-        //        },
-        //        "data": "Veri",
-        //        "deleteTitle": "Filtreleme kuralını silin",
-        //        "leftTitle": "Kriteri dışarı çıkart",
-        //        "logicAnd": "ve",
-        //        "logicOr": "veya",
-        //        "rightTitle": "Kriteri içeri al",
-        //        "title": {
-        //            "0": "Arama Oluşturucu",
-        //            "_": "Arama Oluşturucu (%d)"
-        //        },
-        //        "value": "Değer",
-        //        "clearAll": "Filtreleri Temizle"
-        //    },
-        //    "searchPanes": {
-        //        "clearMessage": "Hepsini Temizle",
-        //        "collapse": {
-        //            "0": "Arama Bölmesi",
-        //            "_": "Arama Bölmesi (%d)"
-        //        },
-        //        "count": "{total}",
-        //        "countFiltered": "{shown}\/{total}",
-        //        "emptyPanes": "Arama Bölmesi yok",
-        //        "loadMessage": "Arama Bölmeleri yükleniyor ...",
-        //        "title": "Etkin filtreler - %d",
-        //        "showMessage": "Tümünü Göster",
-        //        "collapseMessage": "Tümünü Gizle"
-        //    },
-        //    "thousands": ".",
-        //    "datetime": {
-        //        "amPm": [
-        //            "öö",
-        //            "ös"
-        //        ],
-        //        "hours": "Saat",
-        //        "minutes": "Dakika",
-        //        "next": "Sonraki",
-        //        "previous": "Önceki",
-        //        "seconds": "Saniye",
-        //        "unknown": "Bilinmeyen",
-        //        "weekdays": {
-        //            "6": "Paz",
-        //            "5": "Cmt",
-        //            "4": "Cum",
-        //            "3": "Per",
-        //            "2": "Çar",
-        //            "1": "Sal",
-        //            "0": "Pzt"
-        //        },
-        //        "months": {
-        //            "9": "Ekim",
-        //            "8": "Eylül",
-        //            "7": "Ağustos",
-        //            "6": "Temmuz",
-        //            "5": "Haziran",
-        //            "4": "Mayıs",
-        //            "3": "Nisan",
-        //            "2": "Mart",
-        //            "11": "Aralık",
-        //            "10": "Kasım",
-        //            "1": "Şubat",
-        //            "0": "Ocak"
-        //        }
-        //    },
-        //    "decimal": ",",
-        //    "editor": {
-        //        "close": "Kapat",
-        //        "create": {
-        //            "button": "Yeni",
-        //            "submit": "Kaydet",
-        //            "title": "Yeni kayıt oluştur"
-        //        },
-        //        "edit": {
-        //            "button": "Düzenle",
-        //            "submit": "Güncelle",
-        //            "title": "Kaydı düzenle"
-        //        },
-        //        "error": {
-        //            "system": "Bir sistem hatası oluştu (Ayrıntılı bilgi)"
-        //        },
-        //        "multi": {
-        //            "info": "Seçili kayıtlar bu alanda farklı değerler içeriyor. Seçili kayıtların hepsinde bu alana aynı değeri atamak için buraya tıklayın; aksi halde her kayıt bu alanda kendi değerini koruyacak.",
-        //            "noMulti": "Bu alan bir grup olarak değil ancak tekil olarak düzenlenebilir.",
-        //            "restore": "Değişiklikleri geri al",
-        //            "title": "Çoklu değer"
-        //        },
-        //        "remove": {
-        //            "button": "Sil",
-        //            "confirm": {
-        //                "_": "%d adet kaydı silmek istediğinize emin misiniz?",
-        //                "1": "Bu kaydı silmek istediğinizden emin misiniz?"
-        //            },
-        //            "submit": "Sil",
-        //            "title": "Kayıtları sil"
-        //        }
-        //    },
-        //    "stateRestore": {
-        //        "creationModal": {
-        //            "button": "Kaydet",
-        //            "columns": {
-        //                "search": "Kolon Araması",
-        //                "visible": "Kolon Görünümü"
-        //            },
-        //            "name": "Görünüm İsmi",
-        //            "order": "Sıralama",
-        //            "paging": "Sayfalama",
-        //            "scroller": "Kaydırma (Scrool)",
-        //            "search": "Arama",
-        //            "searchBuilder": "Arama Oluşturucu",
-        //            "select": "Seçimler",
-        //            "title": "Yeni Görünüm Oluştur",
-        //            "toggleLabel": "Kaydedilecek Olanlar"
-        //        },
-        //        "duplicateError": "Bu Görünüm Daha Önce Tanımlanmış",
-        //        "emptyError": "Görünüm Boş Olamaz",
-        //        "emptyStates": "Herhangi Bir Görünüm Yok",
-        //        "removeJoiner": "ve",
-        //        "removeSubmit": "Sil",
-        //        "removeTitle": "Görünüm Sil",
-        //        "renameButton": "Değiştir",
-        //        "renameLabel": "Görünüme Yeni İsim Ver -&gt; %s:",
-        //        "renameTitle": "Görünüm İsmini Değiştir",
-        //        "removeConfirm": "Görünümü silmek istediğinize emin misiniz?",
-        //        "removeError": "Görünüm silinemedi"
-        //    }
-        //},
-        //        "footerCallback": function (row, data, start, end, display) {
-        //            var api = this.api(), data;
-
-        //            // converting to interger to find total
-        //            var intVal = function (i) {
-        //                return typeof i === 'string' ?
-        //                    i.replace(/[\$,]/g, '') * 1 :
-        //                    typeof i === 'number' ?
-        //                        i : 0;
-        //            };
-
-        //            // computing column Total of the complete result
-        //            var Total = api
-        //                .column(2)
-        //                .data()
-        //                .reduce(function (a, b) {
-        //                    return intVal(a) + intVal(b);
-        //                }, 0);
-        //            $(api.column(1).footer()).html('Total');
-        //            $(api.column(2).footer()).html(Total);
-        //        },
-    });
-});
 //---------------DATATABLE-------------------------------//
 
 //#endregion
@@ -830,69 +850,7 @@ function getPartialView(form, id) {
 }
 //#endregion
 
-//-kullanım   onsubmit="return askBeforeDelete(this,'divid');"    -//
-function askBeforeAdd(form, id) {
-
-    var partialDiv = document.getElementById(id);
-
-    swal({
-
-        title: "Ekleme İşlemini Onaylıyor Musunuz ?",
-        text: "Bu işlem Geri Alınamaz!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: false,
-        buttons: {
-            cancel: true,
-            confirm: "Onayla",
-            cancel: "İptal"
-
-        }
-
-
-    })
-        .then((willDelete) => {
-            if (willDelete) {
-                try {
-                    $(partialDiv).empty;
-                    $.ajax({
-                        beforeSend: function () {
-                            //$('#loader').removeClass('hidden')
-                        },
-                        type: 'POST',
-                        url: form.action,
-                        data: new FormData(form),
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-
-                            $(partialDiv).html(res.html);
-
-
-                        },
-                        error: function (err) {
-                            console.log(err)
-                        },
-                        complete: function () {
-                            //$('#loader').addClass('hidden')
-                        },
-
-
-                    })
-                } catch (ex) {
-                    console.log(ex)
-                }
-                swal("İşlem Başarıyla Gerçekleştirildi", {
-                    icon: "success",
-                });
-            } else {
-                swal("İşlem İptal Edildi");
-            }
-        });
-
-
-
-    return false;
+//#region ask add or delete then partialview
 
 //-kullanım   onsubmit="return askBeforeDelete(this,'divid');"    -//
 function askBeforeDelete(form, id) {
@@ -957,35 +915,14 @@ function askBeforeDelete(form, id) {
 
     return false;
 }
+function askBeforeAdd(form, id) {
 
-
-$(document).ready(function () {
-    VirtualSelect.init({
-        ele: '.virtualMultiple',
-        multiple: true, search: true,
-        autoSelectFirstOption: false,
-        selectAllOnlyVisible: true,
-    });
-    VirtualSelect.init({
-        placeholder: 'Select',
-        ariaLabelText:'Select',
-        ele: '.virtualSingle',
-        autoSelectFirstOption:false,
-        multiple: true, search: true,
-        selectAllOnlyVisible: true,
-    });
-});
-
-function OpenModalWithFormSubmit(form, id, title) {
-
-    var myModal = new bootstrap.Modal(document.getElementById(id), {
-        keyboard: false
-    });
+    var partialDiv = document.getElementById(id);
 
     swal({
 
-        title: "Pop-up Açılsın mı ?",
-        text: "Seçili işlemi göndermek üzeresiniz!",
+        title: "Ekleme İşlemini Onaylıyor Musunuz ?",
+        text: "Bu işlem Geri Alınamaz!",
         icon: "warning",
         buttons: true,
         dangerMode: false,
@@ -1001,9 +938,10 @@ function OpenModalWithFormSubmit(form, id, title) {
         .then((willDelete) => {
             if (willDelete) {
                 try {
+                    $(partialDiv).empty;
                     $.ajax({
                         beforeSend: function () {
-                            $('#loader').removeClass('hidden')
+                            //$('#loader').removeClass('hidden')
                         },
                         type: 'POST',
                         url: form.action,
@@ -1011,36 +949,36 @@ function OpenModalWithFormSubmit(form, id, title) {
                         contentType: false,
                         processData: false,
                         success: function (res) {
-                            $('#customModal').modal({ show: true });
-                            myModal.toggle();
-                            $('#customModal .modal-body').html(res.html);
-                            $('#customModal #popupTitle').html(title);
-                            $('#customModal').removeClass('hide');
 
-                            $('#loader').addClass('hidden');
+                            $(partialDiv).html(res.html);
 
 
                         },
                         error: function (err) {
-                            $('#loader').addClass('hidden');
-                            console.log(err);
-
+                            console.log(err)
                         },
                         complete: function () {
-                            $('#loader').addClass('hidden');
+                            //$('#loader').addClass('hidden')
                         },
 
 
                     })
                 } catch (ex) {
                     console.log(ex)
-
                 }
+                swal("İşlem Başarıyla Gerçekleştirildi", {
+                    icon: "success",
+                });
             } else {
                 swal("İşlem İptal Edildi");
             }
         });
 
-    return false;
 
+
+    return false;
 }
+
+//-kullanım   onsubmit="return askBeforeDelete(this,'divid');"    -//
+
+//#endregion

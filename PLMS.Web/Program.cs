@@ -63,18 +63,13 @@ namespace PLMS.Web
             app.UseNToastNotify();
 
             app.MapRazorPages();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapAreaControllerRoute(
-                    name: "areas",
-                    areaName: "areas",
-                    pattern: "{area}/{controller=Account}/{action=Index}/{id?}"
-                    );
-            });
+			app.MapControllerRoute(
+				name: "areas",
+				pattern: "{area}/{controller=Account}/{action=Index}/{id?}");
+			app.MapControllerRoute(
+                name:"Default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
