@@ -1,8 +1,6 @@
 ﻿//#region DisplayInPopUp Functions
-//---------------KATMANLI MODAL YAPISI-------------------------------//
 
-//-kullanım--   onclick="displayInPopup('@Url.Action("_GetAdressDetails","Uretim",new {depoadres = item.depoAdres })',title='Adres: '+ this.value)" value="@item.depoAdres" data-bs-toggle="modal" data-bs-target="#popupModal" --//
-
+//onclick="displayInPopup('@Url.Action("_GetAdressDetails","Uretim",new {depoadres = item.depoAdres })',title='Adres: '+ this.value)" data-bs-toggle="modal" data-bs-target="#popupModal" --//
 function displayAccountPopup(url) {
 
     $.ajax({
@@ -17,7 +15,6 @@ function displayAccountPopup(url) {
     });
 
 };
-
 function displayInPopup(url, title) {
 
     $.ajax({
@@ -66,19 +63,9 @@ function displayInPopup3(url, title) {
     });
 
 };
-//---------------KATMANLI MODAL YAPISI-------------------------------//
 //#endregion
 
 //#region Datatable Functions
-//---------------DATATABLE-------------------------------//
-
-
-//`
-//<'row' <'col-sm-4'B> <'col-sm-4'<'toolbar'>> <'col-sm-4'f> >
-//<'row'<'col-sm-12'tr>>
-//<'row'<'col-sm-5'i><'col-sm-7'p>>
-//<'row'<'#btn_custom.col-sm-6 col-lg-2'>>
-//`
 function DataTableJS(id, title) {
     var table = document.getElementById(id);
     $(table).DataTable({
@@ -843,7 +830,7 @@ function getPartialView(form, id) {
 }
 //#endregion
 
-//#region AskBeforeFunctions
+//-kullanım   onsubmit="return askBeforeDelete(this,'divid');"    -//
 function askBeforeAdd(form, id) {
 
     var partialDiv = document.getElementById(id);
@@ -906,10 +893,7 @@ function askBeforeAdd(form, id) {
 
 
     return false;
-}
-//---------------ASK FOR ADD-------------------------------//
 
-//---------------ASK FOR DELETE-------------------------------//
 //-kullanım   onsubmit="return askBeforeDelete(this,'divid');"    -//
 function askBeforeDelete(form, id) {
 
@@ -973,20 +957,14 @@ function askBeforeDelete(form, id) {
 
     return false;
 }
-//---------------ASK FOR DELETE-------------------------------//
-//#endregion
 
-//#region VirtualSelect
 
-//---------------VIRTUAL SELECT-------------------------------//
 $(document).ready(function () {
     VirtualSelect.init({
         ele: '.virtualMultiple',
         multiple: true, search: true,
         autoSelectFirstOption: false,
-        /*   required: true,*/
         selectAllOnlyVisible: true,
-        /*hideValueTooltipOnSelectAll: true,*/
     });
     VirtualSelect.init({
         placeholder: 'Select',
@@ -994,31 +972,10 @@ $(document).ready(function () {
         ele: '.virtualSingle',
         autoSelectFirstOption:false,
         multiple: true, search: true,
-        /*   required: true,*/
         selectAllOnlyVisible: true,
-        /*hideValueTooltipOnSelectAll: true,*/
     });
 });
-//---------------VIRTUAL SELECT-------------------------------//
-//#endregion
 
-//#region Select2
-$(document).ready(function () {
-    $('.customSelect2').select2({
-        placeholder: "Seçiniz",
-        allowClear: false,
-        focus: false,
-        closeOnSelect: true,
-        dropdownCssClass: 'select2-info',
-        multiple: false,
-
-    })
-});
-//---------------SELECT2-------------------------------//
-
-//#endregion
-
-//#region SubmitFormAndOpenPopUp
 function OpenModalWithFormSubmit(form, id, title) {
 
     var myModal = new bootstrap.Modal(document.getElementById(id), {
@@ -1054,7 +1011,7 @@ function OpenModalWithFormSubmit(form, id, title) {
                         contentType: false,
                         processData: false,
                         success: function (res) {
-                            //$('#customModal').modal({ show: true });
+                            $('#customModal').modal({ show: true });
                             myModal.toggle();
                             $('#customModal .modal-body').html(res.html);
                             $('#customModal #popupTitle').html(title);
@@ -1087,5 +1044,3 @@ function OpenModalWithFormSubmit(form, id, title) {
     return false;
 
 }
-
- //#endregion
