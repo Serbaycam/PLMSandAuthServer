@@ -30,3 +30,19 @@
     </div>
     <!-- /.card-footer-->
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(() => {
+            $(document).Toasts('create', {
+                class: 'bg-danger opacity-75', // 'bg-success' sınıfı, yeşil arka plan rengi ile başarılı bir toast temsil eder
+                title: 'Başarılı',
+                body: `Başarının gözünü sevem`,
+                autohide: true,
+                delay: 10000,
+                fade: true,
+                close:true
+            });
+
+        });
+    </script>
+}

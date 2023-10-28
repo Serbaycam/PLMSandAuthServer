@@ -30,6 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\adminlte\sweetalert2\sweetalert2.all.js" />
+    <None Include="wwwroot\adminlte\sweetalert2\sweetalert2.all.min.js" />
+    <None Include="wwwroot\adminlte\sweetalert2\sweetalert2.js" />
+    <None Include="wwwroot\adminlte\sweetalert2\sweetalert2.min.js" />
+    <None Include="wwwroot\adminlte\toastr\toastr.js.map" />
+    <None Include="wwwroot\adminlte\toastr\toastr.min.js" />
     <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.js" />
     <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.min.js" />
     <None Include="wwwroot\lib\DataTables\js\dataTables.bootstrap4.js" />
