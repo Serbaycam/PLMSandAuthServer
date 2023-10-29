@@ -13,8 +13,36 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title" style="font-size:24px">
+                                            <a asp-action="Index" asp-controller="Home"><i class="fas fa-chevron-circle-left bg-dark border border-secondary text-white" style="border-radius:50px"></i></a>
+                                            @ViewContext.RouteData.Values["controller"].ToString() | @ViewContext.RouteData.Values["action"].ToString()
+                                        </h3>
 
-                                @RenderBody()
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                                                <i class="fas fa-expand"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @RenderBody()
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        Footer
+                                    </div>
+                                    <!-- /.card-footer-->
+                                </div>
+
+                                
 
                             </div>
                         </div>
@@ -36,5 +64,6 @@
     <partial name="Partial/_ScriptsPartial" />
     @await RenderSectionAsync("Scripts", required: false)
     @await Component.InvokeAsync("NToastNotify")
+    <partial name="_ValidationScriptsPartial" />
 </body>
 </html>

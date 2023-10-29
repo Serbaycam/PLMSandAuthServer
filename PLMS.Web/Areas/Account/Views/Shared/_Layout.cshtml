@@ -2,17 +2,68 @@
 <html lang="en">
 <partial name="Partial/_HeadPartial" />
 <body>
-    <partial name="Partial/_NavPartial" />
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="hold-transition sidebar-mini layout-navbar-fixed">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+            <partial name="Partial/_NavPartial" />
+            <partial name="Partial/_SidebarPartial" />
+            <div class="content-wrapper">
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title" style="font-size:24px">
+                                            <a asp-action="Index" asp-controller="Home"><i class="fas fa-chevron-circle-left bg-dark border border-secondary text-white" style="border-radius:50px"></i></a>
+                                            @ViewContext.RouteData.Values["controller"].ToString() | @ViewContext.RouteData.Values["action"].ToString()
+                                        </h3>
+
+                                        <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                                                <i class="fas fa-expand"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @RenderBody()
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        Footer
+                                    </div>
+                                    <!-- /.card-footer-->
+                                </div>
+
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <partial name="Partial/_FooterPartial" />
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
     </div>
     <partial name="Partial/_ModalsPartial" />
-    <partial name="Partial/_FooterPartial" />
     <partial name="Partial/_ScriptsPartial" />
-    <partial name="_ValidationScriptsPartial" />
     @await RenderSectionAsync("Scripts", required: false)
     @await Component.InvokeAsync("NToastNotify")
+    <partial name="_ValidationScriptsPartial" />
 </body>
 </html>
