@@ -1,51 +1,60 @@
 ﻿@model AuthIdentityUserLoginDto;
 @{
-    ViewData["Title"] = "Index";
+    Layout = null;
+    ViewData["Title"] = "Login";
 }
-<div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+<html>
+<partial name="Partial/_HeadPartial" />
+<body>
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
 
-        <div class="col-xl-5 col-lg-7 col-md-9 col-12">
-            <div class="card text-black" style="border-radius: 25px; border-top:#0d6efd 5px solid;">
-                <div class="card-body p-5">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div asp-validation-summary="ModelOnly" class="alert alert-primary"></div>
-                            <p class="text-center h2 fw-bold mb-5 mx-4">Login</p>
+            <div class="col-xl-5 col-lg-7 col-md-9 col-12">
+                <div class="card text-black" style="border-radius: 25px; border-top:#0d6efd 5px solid;">
+                    <div class="card-body p-5">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div asp-validation-summary="ModelOnly" class="alert alert-primary"></div>
+                                <p class="text-center h2 fw-bold mb-5 mx-4">Login</p>
 
-                            <form style="width:100%;" class="mx-4 px-5" asp-area="Account" asp-controller="Account" asp-action="Login" method="post">
+                                <form style="width:100%;" class="mx-4 px-5" asp-area="Account" asp-controller="Account" asp-action="Login" method="post">
 
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                    <div class="form-floating">
-                                        <input asp-for="Email" type="email" class="form-control" id="loginEmailInput" placeholder="name@example.com">
-                                        <label for="loginEmailInput">Email address</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <div class="form-floating">
+                                            <input asp-for="Email" type="email" class="form-control" id="loginEmailInput" placeholder="name@example.com">
+                                            <label for="loginEmailInput">Email address</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                    <div class="form-floating">
-                                        <input asp-for="Password" type="password" class="form-control" id="loginPasswordInput" placeholder="Password">
-                                        <label for="loginPasswordInput">Password</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        <div class="form-floating">
+                                            <input asp-for="Password" type="password" class="form-control" id="loginPasswordInput" placeholder="Password">
+                                            <label for="loginPasswordInput">Password</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="icheck-primary">
-                                    <input asp-for="RememberMe" type="checkbox" id="RememberMe">
-                                    <label for="RememberMe">
-                                        Remember Me
-                                    </label>
-                                </div>
+                                    <div class="icheck-primary">
+                                        <input asp-for="RememberMe" type="checkbox" id="RememberMe">
+                                        <label for="RememberMe">
+                                            Remember Me
+                                        </label>
+                                    </div>
 
-                                <div class="input-group mb-3 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-primary btn-lg me-5">Login</button>
-                                </div>
+                                    <div class="input-group mb-3 d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-primary btn-lg me-5">Login</button>
+                                    </div>
 
-                            </form>
+                                </form>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <partial name="Partial/_ScriptsPartial" />
+    @await Component.InvokeAsync("NToastNotify")
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

@@ -31,7 +31,6 @@ namespace PLMS.Web.Areas.Account.Controllers
 		{
             return View(new AuthIdentityUserLoginDto());
 		}
-
 		[AllowAnonymous]
 		[HttpPost]
 		public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto)
