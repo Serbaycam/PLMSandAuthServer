@@ -7,5 +7,10 @@
         {
             return View();
         }
+
+        public IActionResult UserList()
+        {
+            return View();
+        }
     }
 }

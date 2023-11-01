@@ -46,6 +46,22 @@ namespace AuthIdentity.Service.Services
 
         }
 
+        public async Task<(bool,string)> LoginAsync(AuthIdentityUserLoginDto authIdentityUserLoginDto)
+        {
+            AuthIdentityUser hasUser = await _userManager.FindByEmailAsync(authIdentityUserLoginDto.Email);
+            if (hasUser == null)
+                return (false,"User Not found");
+            SignInResult signInResult = await _signInManager.PasswordSignInAsync(hasUser,authIdentityUserLoginDto.Password,authIdentityUserLoginDto.RememberMe,false);
+            if(!signInResult.Succeeded)
+            {
+                return (true,signInResult.ToString());
+            }
+            else
+            {
+                return (false,signInResult.ToString());
+            }
+
+        }
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();

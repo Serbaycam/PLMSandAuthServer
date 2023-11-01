@@ -7,17 +7,10 @@ namespace PLMS.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
-            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
-            builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
-            {
-                ProgressBar = true,
-                Timeout = 10000
-            });
-
-            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
-            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
+            builder.Services.AddFluentValidationWithExt();
+            builder.Services.AddNotifyWithExt();
+            builder.Services.AddAutoMapperWithExt();
+            
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
@@ -42,16 +35,12 @@ namespace PLMS.Web
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
 
-            builder.Services.AddIdentity<AuthIdentityUser, AuthIdentityRole>().AddEntityFrameworkStores<AuthIdentityDbContext>();
-
-            
+            builder.Services.AddIdentityWithExt();
             var app = builder.Build();
             
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

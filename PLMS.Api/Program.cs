@@ -8,9 +8,7 @@ namespace PLMS.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
-            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
-            builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
+            builder.Services.AddFluentValidationWithExt();
             builder.Services.Configure<ApiBehaviorOptions>(opt =>
             {
                 opt.SuppressModelStateInvalidFilter = true;
@@ -20,21 +18,13 @@ namespace PLMS.Api
 
 
             builder.Services.AddScoped(typeof(NotFoundFilter<,>));
-            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapProfile)));
-            builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
+            builder.Services.AddAutoMapperWithExt();
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false)
                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 ;
-            builder.Services.AddDbContext<AuthIdentityDbContext>(x =>
-            {
-                x.UseSqlServer(builder.Configuration.GetConnectionString("AuthIdentityConnection"), option =>
-                {
-                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AuthIdentityDbContext)).GetName().Name);
-                });
-            });
             builder.Services.AddDbContext<PLMSDbContext>(x =>
             {
                 x.UseSqlServer(builder.Configuration.GetConnectionString("PLMSConnection"), option =>
@@ -45,7 +35,6 @@ namespace PLMS.Api
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
-            builder.Services.AddIdentity<AuthIdentityUser, AuthIdentityRole>().AddEntityFrameworkStores<AuthIdentityDbContext>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

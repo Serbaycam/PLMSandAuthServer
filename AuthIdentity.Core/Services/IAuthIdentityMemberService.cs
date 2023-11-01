@@ -8,7 +8,8 @@ namespace AuthIdentity.Core.Services
 	{
 
 		Task<AuthIdentityUserDto> GetUserDtoByUserNameAsync(string userName);
-		Task Logout();
+		Task<(bool, string)> LoginAsync(AuthIdentityUserLoginDto authIdentityUserLoginDto);
+        Task Logout();
 		public Task<(bool, IEnumerable<IdentityError>)> RegisterUserByUserDtoAsync(AuthIdentityUserRegisterDto authIdentityUserRegisterDto);
 	}
 }

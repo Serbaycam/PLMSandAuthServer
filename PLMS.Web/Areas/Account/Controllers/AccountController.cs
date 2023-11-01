@@ -1,4 +1,6 @@
-﻿namespace PLMS.Web.Areas.Account.Controllers
+﻿using AuthIdentity.Core.DTOs;
+
+namespace PLMS.Web.Areas.Account.Controllers
 {
 	[Area("Account")]
 	public class AccountController : Controller
@@ -32,9 +34,22 @@
 
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult Login(AuthIdentityUserLoginDto authIdentityUserLoginDto)
+		public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto)
 		{
-			return View(authIdentityUserLoginDto);
+            var (isSuccess, error) = await _identityMemberService.LoginAsync(authIdentityUserLoginDto);
+			if(!isSuccess)
+			{
+				_toastNotification.AddErrorToastMessage(error);
+				return View(authIdentityUserLoginDto);
+			}
+			else
+			{
+				_toastNotification.AddSuccessToastMessage("Login successfully");
+                return RedirectToAction(nameof(Index));
+            }
+				
+			
+
 		}
 
 
