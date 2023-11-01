@@ -12,9 +12,11 @@ namespace AuthIdentity.Service.Services
         private readonly SignInManager<AuthIdentityUser> _signInManager;
         private readonly IMapper _mapper;
 
-        public AuthIdentityMemberService(UserManager<AuthIdentityUser> userManager)
+        public AuthIdentityMemberService(UserManager<AuthIdentityUser> userManager, SignInManager<AuthIdentityUser> signInManager, IMapper mapper)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         public async Task<AuthIdentityUserDto> GetUserDtoByUserNameAsync(string userName)
@@ -54,11 +56,11 @@ namespace AuthIdentity.Service.Services
             SignInResult signInResult = await _signInManager.PasswordSignInAsync(hasUser,authIdentityUserLoginDto.Password,authIdentityUserLoginDto.RememberMe,false);
             if(!signInResult.Succeeded)
             {
-                return (true,signInResult.ToString());
+                return (false,signInResult.ToString());
             }
             else
             {
-                return (false,signInResult.ToString());
+                return (true,signInResult.ToString());
             }
 
         }
