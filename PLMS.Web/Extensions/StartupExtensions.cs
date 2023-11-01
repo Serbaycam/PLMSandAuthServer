@@ -13,6 +13,11 @@
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequireNonAlphanumeric = false;
+
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+
             }).AddEntityFrameworkStores<AuthIdentityDbContext>();
         }
 
@@ -21,6 +26,22 @@
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
 
+        }
+
+
+        public static void AddCookieOptionsWithExt(this IServiceCollection services)
+        {
+            services.ConfigureApplicationCookie(options =>
+            {
+                CookieBuilder cookieBuilder = new CookieBuilder();
+                cookieBuilder.Name = "PLMSWebApp";
+                options.LoginPath = new PathString("/Account/Account/Login");
+                options.Cookie = cookieBuilder;
+                options.ExpireTimeSpan = TimeSpan.FromHours(12);
+                options.SlidingExpiration = true;
+
+
+            });
         }
 
         public static void AddAutoMapperWithExt(this IServiceCollection services)

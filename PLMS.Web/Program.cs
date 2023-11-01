@@ -1,3 +1,5 @@
+
+
 namespace PLMS.Web
 {
     public class Program
@@ -36,6 +38,8 @@ namespace PLMS.Web
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
 
             builder.Services.AddIdentityWithExt();
+            builder.Services.AddCookieOptionsWithExt();
+
             var app = builder.Build();
             
             if (!app.Environment.IsDevelopment())
@@ -48,9 +52,10 @@ namespace PLMS.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseNToastNotify();
+
 
             app.MapRazorPages();
 

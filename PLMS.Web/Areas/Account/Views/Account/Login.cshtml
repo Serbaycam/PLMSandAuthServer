@@ -14,10 +14,9 @@
                     <div class="card-body p-5">
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                <div asp-validation-summary="ModelOnly" class="alert alert-primary"></div>
                                 <p class="text-center h2 fw-bold mb-5 mx-4">Login</p>
 
-                                <form style="width:100%;" class="mx-4 px-5" asp-area="Account" asp-controller="Account" asp-action="Login" method="post">
+                                <form style="width:100%;" class="mx-4 px-5" asp-area="Account" asp-controller="Account" asp-route-returnUrl="@Context.Request.Query["returnUrl"]" asp-action="Login" method="post">
 
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
@@ -25,6 +24,7 @@
                                             <input asp-for="Email" type="email" class="form-control" id="loginEmailInput" placeholder="name@example.com">
                                             <label for="loginEmailInput">Email address</label>
                                         </div>
+                                        <span class="text-danger" asp-validation-for="Email"></span>
                                     </div>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><i class="fas fa-key"></i></span>
@@ -32,6 +32,7 @@
                                             <input asp-for="Password" type="password" class="form-control" id="loginPasswordInput" placeholder="Password">
                                             <label for="loginPasswordInput">Password</label>
                                         </div>
+                                        <span class="text-danger" asp-validation-for="Password"></span>
                                     </div>
                                     <div class="icheck-primary">
                                         <input asp-for="RememberMe" type="checkbox" id="RememberMe">

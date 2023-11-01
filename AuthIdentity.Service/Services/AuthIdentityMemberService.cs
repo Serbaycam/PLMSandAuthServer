@@ -53,7 +53,7 @@ namespace AuthIdentity.Service.Services
             AuthIdentityUser hasUser = await _userManager.FindByEmailAsync(authIdentityUserLoginDto.Email);
             if (hasUser == null)
                 return (false,"User Not found");
-            SignInResult signInResult = await _signInManager.PasswordSignInAsync(hasUser,authIdentityUserLoginDto.Password,authIdentityUserLoginDto.RememberMe,false);
+            SignInResult signInResult = await _signInManager.PasswordSignInAsync(hasUser,authIdentityUserLoginDto.Password,authIdentityUserLoginDto.RememberMe,true);
             if(!signInResult.Succeeded)
             {
                 return (false,signInResult.ToString());

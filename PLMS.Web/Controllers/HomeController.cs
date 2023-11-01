@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace PLMS.Web.Controllers
+﻿namespace PLMS.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,7 +13,6 @@ namespace PLMS.Web.Controllers
             this.mapper = mapper;
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
