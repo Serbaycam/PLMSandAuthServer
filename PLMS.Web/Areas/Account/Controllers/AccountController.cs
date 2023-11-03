@@ -37,7 +37,7 @@ namespace PLMS.Web.Areas.Account.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto,string returnUrl=null)
         {
-            returnUrl = returnUrl ?? nameof(Index);
+            returnUrl = returnUrl ?? "/Home/Index";
             var (isSuccess, error) = await _identityMemberService.LoginAsync(authIdentityUserLoginDto);
             if (!isSuccess)
             {
