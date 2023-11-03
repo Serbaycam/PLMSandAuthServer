@@ -12,7 +12,7 @@ namespace PLMS.Web
             builder.Services.AddFluentValidationWithExt();
             builder.Services.AddNotifyWithExt();
             builder.Services.AddAutoMapperWithExt();
-            
+
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
@@ -33,7 +33,7 @@ namespace PLMS.Web
                     option.MigrationsAssembly(Assembly.GetAssembly(typeof(PLMSDbContext)).GetName().Name);
                 });
             });
-          
+            builder.Services.AddConfigureSecurityStampWithExt();
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));
 
@@ -41,7 +41,7 @@ namespace PLMS.Web
             builder.Services.AddCookieOptionsWithExt();
 
             var app = builder.Build();
-            
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -59,12 +59,12 @@ namespace PLMS.Web
 
             app.MapRazorPages();
 
-			app.MapControllerRoute(
-				name: "areas",
-				pattern: "{area}/{controller=Account}/{action=Index}/{id?}");
-			app.MapControllerRoute(
-                name:"Default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area}/{controller=Account}/{action=Index}/{id?}");
+            app.MapControllerRoute(
+                name: "Default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

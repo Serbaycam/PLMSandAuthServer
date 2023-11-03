@@ -21,6 +21,14 @@
             }).AddEntityFrameworkStores<AuthIdentityDbContext>();
         }
 
+        public static void AddConfigureSecurityStampWithExt(this IServiceCollection services)
+        {
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.FromMinutes(5);
+            });
+        }
+
         public static void AddFluentValidationWithExt(this IServiceCollection services)
         {
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
