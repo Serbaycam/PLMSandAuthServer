@@ -16,6 +16,9 @@
             }).AddEntityFrameworkStores<AuthIdentityDbContext>();
         }
 
+#pragma warning disable CA1041 // Provide ObsoleteAttribute message
+        [Obsolete]
+#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public static void AddFluentValidationWithExt(this IServiceCollection services)
         {
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));

@@ -1,5 +1,6 @@
 ﻿namespace PLMS.Core.DTOs.Product
 {
+#nullable enable
     public class ProductDto : BaseDto
     {
         public string ?Name { get; set; }

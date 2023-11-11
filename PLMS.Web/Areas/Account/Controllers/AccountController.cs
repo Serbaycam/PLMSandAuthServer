@@ -1,7 +1,4 @@
-﻿using AuthIdentity.Core.DTOs;
-using PLMS.Web.Controllers;
-
-namespace PLMS.Web.Areas.Account.Controllers
+﻿namespace PLMS.Web.Areas.Account.Controllers
 {
     [Area("Account")]
     [Authorize]
@@ -10,6 +7,7 @@ namespace PLMS.Web.Areas.Account.Controllers
         private readonly IAuthIdentityMemberService _identityMemberService;
         private readonly IMapper _mapper;
         private readonly IToastNotification _toastNotification;
+        private string UserName => User.Identity.Name;
 
         public AccountController(IMapper mapper, IAuthIdentityMemberService identityMemberService, IToastNotification toastNotification)
         {
@@ -18,15 +16,19 @@ namespace PLMS.Web.Areas.Account.Controllers
             _toastNotification = toastNotification;
         }
 
-        private string userName => User.Identity.Name;
+       
 
-        public IActionResult Index()
+        #region User Profile
+        public async Task<IActionResult> UserProfile()
         {
-            return View();
+            AuthIdentityUserDto authIdentityUserDto = await _identityMemberService.GetUserDtoByUserNameAsync(UserName);
+            return View(authIdentityUserDto);
         }
+        #endregion
 
 
 
+        #region Login Methods
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -35,9 +37,9 @@ namespace PLMS.Web.Areas.Account.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto,string returnUrl=null)
+        public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto, string returnUrl = null)
         {
-            returnUrl = returnUrl ?? "/Home/Index";
+            returnUrl ??= "/Home/Index";
             var (isSuccess, error) = await _identityMemberService.LoginAsync(authIdentityUserLoginDto);
             if (!isSuccess)
             {
@@ -53,9 +55,9 @@ namespace PLMS.Web.Areas.Account.Controllers
 
 
         }
+        #endregion
 
-
-
+        #region Register Methods
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
@@ -78,13 +80,18 @@ namespace PLMS.Web.Areas.Account.Controllers
             _toastNotification.AddSuccessToastMessage("Register completed successfuly");
             return RedirectToAction(nameof(Login));
         }
+        #endregion
 
-
+        #region Logout Method
         public async Task<IActionResult> Logout()
         {
             await _identityMemberService.Logout();
             _toastNotification.AddSuccessToastMessage("Logout successfully");
             return RedirectToAction(nameof(Login));
         }
+        #endregion
+
+
+
     }
 }
