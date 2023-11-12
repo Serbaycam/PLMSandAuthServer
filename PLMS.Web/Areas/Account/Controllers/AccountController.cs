@@ -26,8 +26,6 @@
         }
         #endregion
 
-
-
         #region Login Methods
         [AllowAnonymous]
         [HttpGet]
@@ -90,8 +88,6 @@
             return RedirectToAction(nameof(Login));
         }
         #endregion
-
-
 
     }
 }
