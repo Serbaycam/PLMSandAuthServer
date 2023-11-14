@@ -6,18 +6,12 @@ using System.Linq.Expressions;
 
 namespace PLMS.Service.Services
 {
-    public class GenericService<TEntity,TContext>:IGenericService<TEntity,TContext>
+    public class GenericService<TEntity,TContext>(IGenericRepository<TEntity, TContext> genericRepository, IUnitOfWork<TContext> unitOfWork) : IGenericService<TEntity,TContext>
         where TEntity : class
         where TContext : DbContext
     {
-        private readonly IGenericRepository<TEntity, TContext> _genericRepository;
-        private readonly IUnitOfWork<TContext> _unitOfWork;
-
-        public GenericService(IGenericRepository<TEntity, TContext> genericRepository, IUnitOfWork<TContext> unitOfWork)
-        {
-            _genericRepository = genericRepository;
-            _unitOfWork = unitOfWork;
-        }
+        private readonly IGenericRepository<TEntity, TContext> _genericRepository = genericRepository;
+        private readonly IUnitOfWork<TContext> _unitOfWork = unitOfWork;
 
         public async Task AddAsync(TEntity entity)
         {

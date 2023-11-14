@@ -6,18 +6,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AuthIdentity.Service.Services
 {
-    public class AuthIdentityMemberService : IAuthIdentityMemberService
+    public class AuthIdentityMemberService(UserManager<AuthIdentityUser> userManager, SignInManager<AuthIdentityUser> signInManager, IMapper mapper) : IAuthIdentityMemberService
     {
-        private readonly UserManager<AuthIdentityUser> _userManager;
-        private readonly SignInManager<AuthIdentityUser> _signInManager;
-        private readonly IMapper _mapper;
-
-        public AuthIdentityMemberService(UserManager<AuthIdentityUser> userManager, SignInManager<AuthIdentityUser> signInManager, IMapper mapper)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _mapper = mapper;
-        }
+        private readonly UserManager<AuthIdentityUser> _userManager = userManager;
+        private readonly SignInManager<AuthIdentityUser> _signInManager = signInManager;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<AuthIdentityUserDto> GetUserDtoByUserNameAsync(string userName)
         {

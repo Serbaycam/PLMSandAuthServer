@@ -3,15 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthIdentity.Repository.UnitOfWork
 {
-    public class AuthIdentityUnitOfWork<TContext>:IAuthIdentityUnitOfWork<TContext>
+    public class AuthIdentityUnitOfWork<TContext>(DbContext context) : IAuthIdentityUnitOfWork<TContext>
         where TContext : DbContext
     {
-        private readonly DbContext _context;
+        private readonly DbContext _context = context;
 
-        public AuthIdentityUnitOfWork(DbContext context)
-        {
-            _context = context;
-        }
         public void Commit()
         {
             _context.SaveChanges();

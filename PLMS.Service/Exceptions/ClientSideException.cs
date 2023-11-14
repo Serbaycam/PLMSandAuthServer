@@ -1,10 +1,6 @@
 ﻿namespace PLMS.Service.Exceptions
 {
-    public class ClientSideException:Exception
+    public class ClientSideException(string message) : Exception(message)
     {
-        public ClientSideException(string message):base(message)
-        {
-            
-        }
     }
 }

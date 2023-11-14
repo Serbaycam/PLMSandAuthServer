@@ -4,12 +4,8 @@ using System.Reflection;
 
 namespace PLMS.Repository.Contexts
 {
-    public class PLMSDbContext : DbContext
+    public class PLMSDbContext(DbContextOptions<PLMSDbContext> options) : DbContext(options)
     {
-        public PLMSDbContext(DbContextOptions<PLMSDbContext> options) : base(options)
-        {
-        }
-
         DbSet<Category> Categories { get; set; }
         DbSet<Product> Products { get; set; }
 

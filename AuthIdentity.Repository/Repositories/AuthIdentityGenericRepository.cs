@@ -4,19 +4,12 @@ using System.Linq.Expressions;
 
 namespace AuthIdentity.Repository.Repositories
 {
-    public class AuthIdentityGenericRepository<TEntity, TContext> : IAuthIdentityGenericRepository<TEntity, TContext>
+    public class AuthIdentityGenericRepository<TEntity, TContext>(TContext context) : IAuthIdentityGenericRepository<TEntity, TContext>
         where TEntity : class
         where TContext : DbContext
     {
-        protected readonly TContext _context;
-        private readonly DbSet<TEntity> _dbSet;
-
-        public AuthIdentityGenericRepository(TContext context)
-        {
-            _context = context;
-            _dbSet = _context.Set<TEntity>();
-
-        }
+        protected readonly TContext _context = context;
+        private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
         public async Task AddAsync(TEntity entity)
         {

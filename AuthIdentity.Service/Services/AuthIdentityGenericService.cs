@@ -5,19 +5,12 @@ using System.Linq.Expressions;
 
 namespace AuthIdentity.Service.Services
 {
-    public class AuthIdentityGenericService<TEntity, TContext> : IAuthIdentityGenericService<TEntity, TContext>
+    public class AuthIdentityGenericService<TEntity, TContext>(IAuthIdentityGenericService<TEntity, TContext> genericRepository, IAuthIdentityUnitOfWork<TContext> unitOfWork) : IAuthIdentityGenericService<TEntity, TContext>
         where TEntity : class
         where TContext : DbContext
     {
-        private readonly IAuthIdentityGenericService<TEntity, TContext> _genericRepository;
-        private readonly IAuthIdentityUnitOfWork<TContext> _unitOfWork;
-
-        public AuthIdentityGenericService(IAuthIdentityGenericService<TEntity, TContext> genericRepository, IAuthIdentityUnitOfWork<TContext> unitOfWork)
-        {
-            _genericRepository = genericRepository;
-            _unitOfWork = unitOfWork;
-        }
-
+        private readonly IAuthIdentityGenericService<TEntity, TContext> _genericRepository = genericRepository;
+        private readonly IAuthIdentityUnitOfWork<TContext> _unitOfWork = unitOfWork;
 
         public async Task AddAsync(TEntity entity)
         {

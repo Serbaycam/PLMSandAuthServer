@@ -2,21 +2,14 @@
 {
     [Area("Account")]
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController(IMapper mapper, IAuthIdentityMemberService identityMemberService, IToastNotification toastNotification) : Controller
     {
-        private readonly IAuthIdentityMemberService _identityMemberService;
-        private readonly IMapper _mapper;
-        private readonly IToastNotification _toastNotification;
+        private readonly IAuthIdentityMemberService _identityMemberService = identityMemberService;
+        private readonly IMapper _mapper = mapper;
+        private readonly IToastNotification _toastNotification = toastNotification;
         private string UserName => User.Identity.Name;
 
-        public AccountController(IMapper mapper, IAuthIdentityMemberService identityMemberService, IToastNotification toastNotification)
-        {
-            _mapper = mapper;
-            _identityMemberService = identityMemberService;
-            _toastNotification = toastNotification;
-        }
 
-       
 
         #region User Profile
         public async Task<IActionResult> UserProfile()

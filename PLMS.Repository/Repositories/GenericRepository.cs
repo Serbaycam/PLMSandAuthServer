@@ -4,19 +4,13 @@ using System.Linq.Expressions;
 
 namespace PLMS.Repository.Repositories
 {
-    public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity,TContext>
+    public class GenericRepository<TEntity, TContext>(TContext context) : IGenericRepository<TEntity,TContext>
         where TEntity : class
         where TContext : DbContext
     {
-        protected readonly TContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        protected readonly TContext _context = context;
+        private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
-        public GenericRepository(TContext context)
-        {
-            _context = context;
-            _dbSet = _context.Set<TEntity>();
-
-        }
 
         public async Task AddAsync(TEntity entity)
         {
