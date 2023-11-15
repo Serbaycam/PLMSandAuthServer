@@ -6,14 +6,9 @@ namespace AuthIdentityJWT.Api.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AuthController : CustomBaseController
+    public class AuthController(IAuthenticationService authenticationService) : CustomBaseController
     {
-        private readonly IAuthenticationService _authenticationService;
-
-        public AuthController(IAuthenticationService authenticationService)
-        {
-            _authenticationService = authenticationService;
-        }
+        private readonly IAuthenticationService _authenticationService = authenticationService;
 
         [HttpPost]
         public async Task<IActionResult> CreateToken(SignInDto signInDto)
