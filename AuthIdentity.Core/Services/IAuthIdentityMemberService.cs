@@ -1,10 +1,9 @@
 ﻿using AuthIdentity.Core.DTOs;
-using AuthIdentity.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace AuthIdentity.Core.Services
 {
-	public interface IAuthIdentityMemberService
+    public interface IAuthIdentityMemberService
 	{
 
 		Task<AuthIdentityUserDto> GetUserDtoByUserNameAsync(string userName);

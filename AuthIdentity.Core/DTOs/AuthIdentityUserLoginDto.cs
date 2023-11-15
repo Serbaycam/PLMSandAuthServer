@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AuthIdentity.Core.DTOs
+﻿namespace AuthIdentity.Core.DTOs
 {
     public class AuthIdentityUserLoginDto
     {
