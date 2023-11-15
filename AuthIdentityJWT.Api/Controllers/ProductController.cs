@@ -9,15 +9,9 @@ namespace AuthIdentityJWT.Api.Controllers
     [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : CustomBaseController
+    public class ProductController(IGenericService<Product, ProductDto> productService) : CustomBaseController
     {
-        private readonly IGenericService<Product, ProductDto> _productService;
-
-        public ProductController(IGenericService<Product, ProductDto> productService)
-        {
-            _productService = productService;
-        }
-
+        private readonly IGenericService<Product, ProductDto> _productService = productService;
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()

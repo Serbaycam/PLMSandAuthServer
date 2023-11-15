@@ -3,14 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthIdentityJWT.Data.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(AppDbContext context) : IUnitOfWork
     {
-        private readonly DbContext _context;
-
-        public UnitOfWork(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly DbContext _context = context;
 
         public void Commit()
         {

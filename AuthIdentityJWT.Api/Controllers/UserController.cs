@@ -7,14 +7,9 @@ namespace AuthIdentityJWT.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : CustomBaseController
+    public class UserController(IUserService userService) : CustomBaseController
     {
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
-        {
-            _userService = userService;
-        }
+        private readonly IUserService _userService = userService;
 
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserDto createUserDto)

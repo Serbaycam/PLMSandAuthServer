@@ -4,17 +4,11 @@ using System.Linq.Expressions;
 
 namespace AuthIdentityJWT.Data.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity>(AppDbContext context) : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DbContext _dbContext;
-        private readonly DbSet<TEntity> _dbSet;
+        private readonly DbContext _dbContext = context;
+        private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
-        public GenericRepository(AppDbContext context)
-        {
-            _dbContext = context;
-            _dbSet = context.Set<TEntity>();
-
-        }
         public async Task AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
