@@ -43,7 +43,7 @@
                                     <!-- /.card-footer-->
                                 </div>
 
-                                
+
 
                             </div>
                         </div>
@@ -56,6 +56,34 @@
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a asp-area="Account" asp-controller="Account" asp-action="UserProfile" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>
+                                    User Profile
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Account" asp-controller="Account" asp-action="ChangePassword" class="nav-link">
+                                <i class="nav-icon fas fa-key"></i>
+                                <p>
+                                    Change Password
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Account" asp-controller="Account" asp-action="ChangeEmail" class="nav-link">
+                                <i class="nav-icon fas fa-key"></i>
+                                <p>
+                                    Change Email
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </aside>
             <!-- /.control-sidebar -->
         </div>

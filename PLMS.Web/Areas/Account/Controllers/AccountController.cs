@@ -12,6 +12,7 @@
 
 
         #region User Profile
+        [HttpGet]
         public async Task<IActionResult> UserProfile()
         {
             AuthIdentityUserDto authIdentityUserDto = await _identityMemberService.GetUserDtoByUserNameAsync(UserName);
@@ -19,7 +20,7 @@
         }
         #endregion
 
-        #region Login Methods
+        #region Login Method
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -48,7 +49,7 @@
         }
         #endregion
 
-        #region Register Methods
+        #region Register Method
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
@@ -74,11 +75,38 @@
         #endregion
 
         #region Logout Method
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _identityMemberService.Logout();
             _toastNotification.AddSuccessToastMessage("Logout successfully");
             return RedirectToAction(nameof(Login));
+        }
+        #endregion
+
+        #region Password Change Method
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View(new AuthIdentityUserChangePasswordDto());
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(AuthIdentityUserChangePasswordDto authIdentityUserChangePasswordDto)
+        {
+            return View();
+        }
+        #endregion
+
+        #region Email Change Method
+        [HttpGet]
+        public IActionResult ChangeEmail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ChangeEmail(string xx)
+        {
+            return View();
         }
         #endregion
 
