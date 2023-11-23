@@ -1,4 +1,6 @@
-﻿namespace PLMS.Web.Areas.Account.Controllers
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace PLMS.Web.Areas.Account.Controllers
 {
     [Area("Account")]
     [Authorize]
@@ -32,6 +34,8 @@
         public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto, string returnUrl = null)
         {
             returnUrl ??= "/Home/Index";
+            if (!ModelState.IsValid)
+                return View(authIdentityUserLoginDto);
             var (isSuccess, error) = await _identityMemberService.LoginAsync(authIdentityUserLoginDto);
             if (!isSuccess)
             {
@@ -60,6 +64,8 @@
         [HttpPost]
         public async Task<IActionResult> Register(AuthIdentityUserRegisterDto authIdentityUserRegisterDto)
         {
+            if (!ModelState.IsValid)
+                return View(authIdentityUserRegisterDto);
             var (isSuccess, errors) = await _identityMemberService.RegisterUserByUserDtoAsync(authIdentityUserRegisterDto);
             if (!isSuccess)
             {
@@ -78,7 +84,7 @@
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await _identityMemberService.Logout();
+            await _identityMemberService.LogoutAsync();
             _toastNotification.AddSuccessToastMessage("Logout successfully");
             return RedirectToAction(nameof(Login));
         }
@@ -91,8 +97,30 @@
             return View(new AuthIdentityUserChangePasswordDto());
         }
         [HttpPost]
-        public IActionResult ChangePassword(AuthIdentityUserChangePasswordDto authIdentityUserChangePasswordDto)
+        public async Task<IActionResult> ChangePassword(AuthIdentityUserChangePasswordDto authIdentityUserChangePasswordDto)
         {
+            if (!ModelState.IsValid)
+                return View(authIdentityUserChangePasswordDto);
+            AuthIdentityUser currentUser = await _identityMemberService.GetUserByNameAsync(User.Identity.Name);
+            bool checkOlPassword = await _identityMemberService.CheckPasswordAsync(currentUser, authIdentityUserChangePasswordDto.OldPassword);
+            if (!checkOlPassword)
+            {
+                _toastNotification.AddErrorToastMessage("Old Password is not correct");
+                return View(authIdentityUserChangePasswordDto);
+            }
+            IdentityResult passwordChangeResult = await _identityMemberService.ChangePasswordAsync(currentUser, authIdentityUserChangePasswordDto.OldPassword, authIdentityUserChangePasswordDto.NewPassword);
+            if (!passwordChangeResult.Succeeded)
+            {
+                foreach (IdentityError error in passwordChangeResult.Errors)
+                {
+                    _toastNotification.AddErrorToastMessage(error.Description);
+                }
+                return View(authIdentityUserChangePasswordDto);
+            }
+            _toastNotification.AddSuccessToastMessage("Password Change Successfully.");
+            await _identityMemberService.UpdateSecurityStampAsync(currentUser);
+            await _identityMemberService.LogoutAsync();
+            await _identityMemberService.LoginAsync(new AuthIdentityUserLoginDto { Email=currentUser.Email,Password=authIdentityUserChangePasswordDto.NewPassword,RememberMe=true});
             return View();
         }
         #endregion

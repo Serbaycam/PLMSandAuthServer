@@ -41,25 +41,45 @@ namespace AuthIdentity.Service.Services
 
         }
 
-        public async Task<(bool,string)> LoginAsync(AuthIdentityUserLoginDto authIdentityUserLoginDto)
+        public async Task<(bool, string)> LoginAsync(AuthIdentityUserLoginDto authIdentityUserLoginDto)
         {
             AuthIdentityUser hasUser = await _userManager.FindByEmailAsync(authIdentityUserLoginDto.Email);
             if (hasUser == null)
-                return (false,"User Not found");
-            SignInResult signInResult = await _signInManager.PasswordSignInAsync(hasUser,authIdentityUserLoginDto.Password,authIdentityUserLoginDto.RememberMe,true);
-            if(!signInResult.Succeeded)
+                return (false, "User Not found");
+            SignInResult signInResult = await _signInManager.PasswordSignInAsync(hasUser, authIdentityUserLoginDto.Password, authIdentityUserLoginDto.RememberMe, true);
+            if (!signInResult.Succeeded)
             {
-                return (false,signInResult.ToString());
+                return (false, signInResult.ToString());
             }
             else
             {
-                return (true,signInResult.ToString());
+                return (true, signInResult.ToString());
             }
 
         }
-        public async Task Logout()
+        public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<AuthIdentityUser> GetUserByNameAsync(string userName)
+        {
+            return await _userManager.FindByNameAsync(userName);
+        }
+
+        public async Task<bool> CheckPasswordAsync(AuthIdentityUser user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(AuthIdentityUser user, string oldPassword, string newPassword)
+        {
+            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+        }
+
+        public async Task<IdentityResult> UpdateSecurityStampAsync(AuthIdentityUser user)
+        {
+            return await _userManager.UpdateSecurityStampAsync(user);
         }
     }
 }
