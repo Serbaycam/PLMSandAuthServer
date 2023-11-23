@@ -4,6 +4,7 @@ using AuthIdentity.Repository.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthIdentity.Repository.Migrations
 {
     [DbContext(typeof(AuthIdentityDbContext))]
-    partial class AuthIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231123173846_UserDetailsAdded")]
+    partial class UserDetailsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +63,7 @@ namespace AuthIdentity.Repository.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("BirthDay")
+                    b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("City")

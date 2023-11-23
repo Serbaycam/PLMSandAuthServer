@@ -4,6 +4,7 @@ using AuthIdentity.Repository.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthIdentity.Repository.Migrations
 {
     [DbContext(typeof(AuthIdentityDbContext))]
-    partial class AuthIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231123174036_UserDetailsAdded1")]
+    partial class UserDetailsAdded1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
