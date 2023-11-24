@@ -62,24 +62,30 @@ namespace AuthIdentity.Service.Services
             await _signInManager.SignOutAsync();
         }
 
-        public async Task<AuthIdentityUser> GetUserByNameAsync(string userName)
+        public async Task<AuthIdentityUser> GetUserByUserNameAsync(string userName)
         {
             return await _userManager.FindByNameAsync(userName);
         }
 
-        public async Task<bool> CheckPasswordAsync(AuthIdentityUser user, string password)
+        public async Task<bool> CheckPasswordAsync(AuthIdentityUser authIdentityUser, string password)
         {
-            return await _userManager.CheckPasswordAsync(user, password);
+            
+            return await _userManager.CheckPasswordAsync(authIdentityUser, password);
         }
 
-        public async Task<IdentityResult> ChangePasswordAsync(AuthIdentityUser user, string oldPassword, string newPassword)
+        public async Task<IdentityResult> ChangePasswordAsync(AuthIdentityUser authIdentityUser, string oldPassword, string newPassword)
         {
-            return await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+            return await _userManager.ChangePasswordAsync(authIdentityUser, oldPassword, newPassword);
         }
 
-        public async Task<IdentityResult> UpdateSecurityStampAsync(AuthIdentityUser user)
+        public async Task<IdentityResult> UpdateSecurityStampAsync(AuthIdentityUser authIdentityUser)
         {
-            return await _userManager.UpdateSecurityStampAsync(user);
+            return await _userManager.UpdateSecurityStampAsync(authIdentityUser);
+        }
+
+        public async Task<IdentityResult> UpdateUserByUserAsync(AuthIdentityUser authIdentityUser)
+        {
+            return await _userManager.UpdateAsync(authIdentityUser);
         }
     }
 }

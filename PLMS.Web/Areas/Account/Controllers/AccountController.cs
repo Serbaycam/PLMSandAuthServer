@@ -20,6 +20,37 @@ namespace PLMS.Web.Areas.Account.Controllers
             AuthIdentityUserDto authIdentityUserDto = await _identityMemberService.GetUserDtoByUserNameAsync(UserName);
             return View(authIdentityUserDto);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UserProfile(AuthIdentityUserDto authIdentityUserDto)
+        {
+            if (!ModelState.IsValid)
+                return View(authIdentityUserDto);
+            AuthIdentityUser currentUser = await _identityMemberService.GetUserByUserNameAsync(UserName);
+            currentUser.PhoneNumber = authIdentityUserDto.PhoneNumber;
+            currentUser.Surname = authIdentityUserDto.Surname;
+            currentUser.Name = authIdentityUserDto.Name;
+            currentUser.Address = authIdentityUserDto.Address;
+            currentUser.Gender = authIdentityUserDto.Gender;
+            currentUser.Education = authIdentityUserDto.Education;
+            currentUser.BirthDay = authIdentityUserDto.BirthDay;
+            currentUser.City = authIdentityUserDto.City;
+            currentUser.Country = authIdentityUserDto.Country;
+            currentUser.Postcode = authIdentityUserDto.Postcode;
+            IdentityResult updateResult = await _identityMemberService.UpdateUserByUserAsync(currentUser);
+            if(!updateResult.Succeeded)
+            {
+                foreach (var error in updateResult.Errors)
+                {
+                    _toastNotification.AddErrorToastMessage(error.Description);
+                }
+                return View(authIdentityUserDto);
+            }
+            _toastNotification.AddSuccessToastMessage("Profile updated");
+            AuthIdentityUserDto reAuthIdentityUserDto = await _identityMemberService.GetUserDtoByUserNameAsync(UserName);
+            return View(reAuthIdentityUserDto);
+
+        }
         #endregion
 
         #region Login Method
@@ -101,7 +132,7 @@ namespace PLMS.Web.Areas.Account.Controllers
         {
             if (!ModelState.IsValid)
                 return View(authIdentityUserChangePasswordDto);
-            AuthIdentityUser currentUser = await _identityMemberService.GetUserByNameAsync(User.Identity.Name);
+            AuthIdentityUser currentUser = await _identityMemberService.GetUserByUserNameAsync(User.Identity.Name);
             bool checkOlPassword = await _identityMemberService.CheckPasswordAsync(currentUser, authIdentityUserChangePasswordDto.OldPassword);
             if (!checkOlPassword)
             {
@@ -120,20 +151,7 @@ namespace PLMS.Web.Areas.Account.Controllers
             _toastNotification.AddSuccessToastMessage("Password Change Successfully.");
             await _identityMemberService.UpdateSecurityStampAsync(currentUser);
             await _identityMemberService.LogoutAsync();
-            await _identityMemberService.LoginAsync(new AuthIdentityUserLoginDto { Email=currentUser.Email,Password=authIdentityUserChangePasswordDto.NewPassword,RememberMe=true});
-            return View();
-        }
-        #endregion
-
-        #region Email Change Method
-        [HttpGet]
-        public IActionResult ChangeEmail()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult ChangeEmail(string xx)
-        {
+            await _identityMemberService.LoginAsync(new AuthIdentityUserLoginDto { Email = currentUser.Email, Password = authIdentityUserChangePasswordDto.NewPassword, RememberMe = true });
             return View();
         }
         #endregion

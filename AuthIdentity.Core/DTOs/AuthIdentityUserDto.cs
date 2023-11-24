@@ -1,4 +1,6 @@
-﻿namespace AuthIdentity.Core.DTOs
+﻿using Microsoft.AspNetCore.Http;
+
+namespace AuthIdentity.Core.DTOs
 {
 	public class AuthIdentityUserDto
 	{
