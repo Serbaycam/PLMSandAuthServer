@@ -1,0 +1,15 @@
+﻿@model List<AuthIdentityRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+@if (Model.Count > 0)
+{
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        Careful.. No roles here ?
+    </div>
+}

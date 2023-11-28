@@ -40,3 +40,4 @@ global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Mvc.ModelBinding;
 global using PLMS.Web.Extensions;
 global using System.Security.Policy;
+global using DataTables.AspNet.AspNetCore;

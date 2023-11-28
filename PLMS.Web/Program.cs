@@ -1,5 +1,3 @@
-
-
 namespace PLMS.Web
 {
     public class Program
@@ -12,7 +10,7 @@ namespace PLMS.Web
             builder.Services.AddFluentValidationWithExt();
             builder.Services.AddNotifyWithExt();
             builder.Services.AddAutoMapperWithExt();
-
+            builder.Services.RegisterDataTables();
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
