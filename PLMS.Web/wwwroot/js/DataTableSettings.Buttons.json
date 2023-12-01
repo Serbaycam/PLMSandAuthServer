@@ -1,0 +1,42 @@
+[
+  {
+    "extend": "collection",
+    "text": "Export",
+    "className": "btn bg-light text-black",
+    "buttons": [
+      {
+        "orientation": "landscape",
+        "pageSize": "A4",
+        "extend": "excelHtml5",
+        "text": "<i class=\"far fa-file-excel\" data-toggle=\"tooltip\" title=\"Export To Excel\"></i> Excel",
+        "exportOptions": {
+          "stripHtml": true
+        }
+      },
+      {
+        "orientation": "landscape",
+        "pageSize": "A4",
+        "extend": "csvHtml5",
+        "text": "<i class=\"fas fa-file-csv\" data-toggle=\"tooltip\" title=\"Export To Csv\"></i> Csv",
+        "className": "btn btn-secondary rounded",
+        "exportOptions": {
+          "stripHtml": true
+        }
+      },
+      {
+        "extend": "pdfHtml5",
+        "text": "<i class=\"far fa-file-pdf\" data-toggle=\"tooltip\" title=\"Export To Pdf\"></i> Pdf",
+        "orientation": "landscape",
+        "className": "btn btn-secondary rounded",
+        "pageSize": "A4"
+      },
+      {
+        "extend": "print",
+        "text": "<i class=\"fas fa-print\" data-toggle=\"tooltip\" title=\"Print\"></i> Yazdır",
+        "orientation": "landscape",
+        "className": "btn btn-secondary rounded",
+        "pageSize": "A4"
+      }
+    ]
+  }
+]
