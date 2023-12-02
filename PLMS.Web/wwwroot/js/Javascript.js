@@ -1,47 +1,29 @@
-//-kullanım--   onclick="displayInPopup('@Url.Action("_GetAdressDetails","Uretim",new {depoadres = item.depoAdres })',title='Adres: '+ this.value)" value="@item.depoAdres" data-bs-toggle="modal" data-bs-target="#popupModal" --//
-function displayInPopup(url, title) {
+function displayInPopup(url, title, modalNumber) {
     $.ajax({
         type: "GET",
         url: url,
         contentType: 'application/html; charset=utf-8',
         dataType: 'html',
         success: function (data) {
-            $('#popupTitle').html(title);
-            $('#popupContent').html(data);
-            $('#popupModal').modal({ backdrop: 'static', keyboard: false, show: true });
+            updateModalContent(modalNumber, title, data);
         }
     });
-};
-function displayInPopup2(url, title) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        contentType: 'application/html; charset=utf-8',
-        dataType: 'html',
-        success: function (data) {
-            $('#popupTitle2').html(title);
-            $('#popupContent2').html(data);
-            $('#popupModal2').modal({ backdrop: 'static', keyboard: false, show: true });
-        }
-    });
-};
-function displayInPopup3(url, title) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        contentType: 'application/html; charset=utf-8',
-        dataType: 'html',
-        success: function (data) {
-            $('#popupTitle3').html(title);
-            $('#popupContent3').html(data);
-            $('#popupModal3').modal({ backdrop: 'static', keyboard: false, show: true });
-        }
-    });
-};
+}
+
+function updateModalContent(modalNumber, title, content) {
+    $(`#popupTitle${modalNumber}`).html(title);
+    $(`#popupContent${modalNumber}`).html(content);
+    $(`#popupModal${modalNumber}`).modal({ backdrop: 'static', keyboard: false, show: true });
+}
+
+async function fetchJson(url) {
+    const response = await fetch(url);
+    return response.json();
+}
+
 async function DataTableJS(id, title) {
     var table = document.getElementById(id);
 
-    // DataTables configuration
     const [buttonConfig, languageConfig] = await Promise.all([
         fetchJson("../js/DataTableSettings.Buttons.json"),
         fetchJson("../js/DataTableSettings.Language.json")
@@ -61,255 +43,214 @@ async function DataTableJS(id, title) {
             $('div.toolbar').html(`<h2 class="fw-bolder text-center">${title}</h2>`);
         },
     });
+}
 
-    async function fetchJson(url) {
-        const response = await fetch(url);
-        return response.json();
-    }
-};
 $(document).ready(function () {
-    (async function () {
-        const buttonConfig = await fetchJson("../js/DataTableSettings.Buttons.json");
-        const languageConfig = await fetchJson("../js/DataTableSettings.Language.json");
+    const dataTableElement = $('.dataTableJS');
 
-        $('.dataTableJS').DataTable({
-            responsive: true,
-            autoWidth: true,
-            colReorder: true,
-            pageLength: 5,
-            dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-md-5'i><'col-md-7'p>>",
-            buttons: buttonConfig,
-            language: languageConfig,
+    if (dataTableElement[0]) {
+        (async function () {
+            const buttonConfig = await fetchJson("../js/DataTableSettings.Buttons.json");
+            const languageConfig = await fetchJson("../js/DataTableSettings.Language.json");
+
+            dataTableElement.DataTable({
+                responsive: true,
+                autoWidth: true,
+                colReorder: true,
+                pageLength: 5,
+                dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-md-5'i><'col-md-7'p>>",
+                buttons: buttonConfig,
+                language: languageConfig,
+            });
+        })();
+    }
+
+    if ($('.virtualMultiple')[0]) {
+        VirtualSelect.init({
+            ele: '.virtualMultiple',
+            multiple: true,
+            search: true,
         });
-    })();
+    }
 
-    async function fetchJson(url) {
-        const response = await fetch(url);
-        return response.json();
+    if ($('.virtualSingle')[0]) {
+        VirtualSelect.init({
+            ele: '.virtualSingle',
+            multiple: false,
+            search: true,
+        });
+    }
+
+    if ($('.customSelect2')[0]) {
+        $('.customSelect2').select2({
+            placeholder: "Seçiniz",
+            allowClear: false,
+            focus: false,
+            closeOnSelect: true,
+            dropdownCssClass: 'select2-info',
+            multiple: false,
+        });
     }
 });
-//-kullanımı  onkeypress="return isNumberKey(event)"   -//
-function isNumberKey(evt) {
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
-    return true;
-}
-//-kullanımı  onkeypress="return isStringKey(event)"   -//
-function isStringKey(evt) {
-    var charCode = (evt.which) ? evt.which : evt.keyCode      
-    if (((charCode <= 93 && charCode >= 65) || (charCode <= 122 && charCode >= 97) || charCode == 8) || charCode == 350 || charCode == 351 || charCode == 304 || charCode == 286 || charCode == 287 || charCode == 231 || charCode == 199 || charCode == 305 || charCode == 214 || charCode == 246 || charCode == 220 || charCode == 252 || charCode == 32) {      
-        return true;       
-    }
-    return false;   
-}
 
-//#region GetPartialView
-//-Get Partial View-//
-//--  onsubmit = "return getPartialView(this,'divid');"  --//
-
-function getPartialView(form, id) {
-    var partialDiv = document.getElementById(id);
-    try {
-        $.ajax({
-            beforeSend: function () {
-                $('#loader').removeClass('hidden')
-            },
-            type: 'POST',
-            url: form.action,
-            data: new FormData(form),
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                $(partialDiv).html(res.html);
-            },
-            error: function (err) {
-                console.log(err)
-            },
-            complete: function () {
-                $('#loader').addClass('hidden')
-            },
-        })
-    } catch (ex) {
-        console.log(ex)
-    }
-    return false;
-}
-function askBeforeAdd(form, id) {
-    var partialDiv = document.getElementById(id);
-    swal({
-        title: "Ekleme İşlemini Onaylıyor Musunuz ?",
-        text: "Bu işlem Geri Alınamaz!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: false,
-        buttons: {
-            cancel: true,
-            confirm: "Onayla",
-            cancel: "İptal"
-        }
-    })
-        .then((willDelete) => {
-            if (willDelete) {
-                try {
-                    $(partialDiv).empty;
-                    $.ajax({
-                        beforeSend: function () {
-                            //$('#loader').removeClass('hidden')
-                        },
-                        type: 'POST',
-                        url: form.action,
-                        data: new FormData(form),
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-                            $(partialDiv).html(res.html);
-
-                        },
-                        error: function (err) {
-                            console.log(err)
-                        },
-                        complete: function () {
-                        },
-                    })
-                } catch (ex) {
-                    console.log(ex)
-                }
-                swal("İşlem Başarıyla Gerçekleştirildi", {
-                    icon: "success",
-                });
-            } else {
-                swal("İşlem İptal Edildi");
-            }
-        });
-    return false;
-}
-function askBeforeDelete(form, id) {
-    var partialDiv = document.getElementById(id);
-    swal({
-        title: "Silme İşlemini Onaylıyor Musunuz ?",
-        text: "Bu işlem Geri Alınamaz!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: false,
-        buttons: {
-            cancel: true,
-            confirm: "Onayla",
-            cancel: "İptal"
-        }
-    })
-        .then((willDelete) => {
-            if (willDelete) {
-                try {
-                    $(partialDiv).empty;
-                    $.ajax({
-                        beforeSend: function () {
-                        },
-                        type: 'POST',
-                        url: form.action,
-                        data: new FormData(form),
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-                            $(partialDiv).html(res.html);
-                        },
-                        error: function (err) {
-                            console.log(err)
-                        },
-                        complete: function () {
-                        },
-                    })
-                } catch (ex) {
-                    console.log(ex)
-                }
-                swal("İşlem Başarıyla Gerçekleştirildi", {
-                    icon: "success",
-                });
-            } else {
-                swal("İşlem İptal Edildi");
-            }
-        });
-    return false;
-}
-$(document).ready(function () {
-    VirtualSelect.init({
-        ele: '.virtualMultiple',
-        multiple: true, search: true,
-        /*   required: true,*/
-        selectAllOnlyVisible: true,
-        /*hideValueTooltipOnSelectAll: true,*/
-    });
-    VirtualSelect.init({
-        ele: '.virtualSingle',
-        multiple: false, search: true,
-        /*   required: true,*/
-        selectAllOnlyVisible: true,
-        /*hideValueTooltipOnSelectAll: true,*/
-    });
-});
-//data-dropdown-css-class="select2-info"
-$(document).ready(function () {
-    $('.customSelect2').select2({
-        placeholder: "Seçiniz",
-        allowClear: false,
-        focus: false,
-        closeOnSelect: true,
-        dropdownCssClass: 'select2-info',
-        multiple:false,
-
-    })
-});
 function OpenModalWithFormSubmit(form, id, title) {
     var myModal = new bootstrap.Modal(document.getElementById(id), {
         keyboard: false
     });
-    swal({
-        title: "Pop-up Açılsın mı ?",
+
+    Swal.fire({
+        title: "Pop-up Açılsın mı?",
         text: "Seçili işlemi göndermek üzeresiniz!",
         icon: "warning",
-        buttons: true,
-        dangerMode: false,
-        buttons: {
-            cancel: true,
-            confirm: "Onayla",
-            cancel: "İptal"
-        }
+        showCancelButton: true,
+        confirmButtonText: "Onayla",
+        cancelButtonText: "İptal",
     })
-        .then((willDelete) => {
-            if (willDelete) {
-                try {
-                    $.ajax({
-                        beforeSend: function () {
-                            $('#loader').removeClass('hidden')
-                        },
-                        type: 'POST',
-                        url: form.action,
-                        data: new FormData(form),
-                        contentType: false,
-                        processData: false,
-                        success: function (res) {
-                            myModal.toggle();
-                            $('#customModal .modal-body').html(res.html);
-                            $('#customModal #popupTitle').html(title);
-                            $('#customModal').removeClass('hide');
-                            $('#loader').addClass('hidden');
-                        },
-                        error: function (err) {
-                            $('#loader').addClass('hidden');
-                            console.log(err);
-                        },
-                        complete: function () {
-                            $('#loader').addClass('hidden');
-                        },
+        .then((result) => {
+            if (result.isConfirmed) {
+                $('#loader').removeClass('hidden');
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                })
+                    .then(function (res) {
+                        myModal.toggle();
+                        $('#customModal .modal-body').html(res.html);
+                        $('#customModal #popupTitle').html(title);
+                        $('#customModal').removeClass('hide');
                     })
-                } catch (ex) {
-                    console.log(ex)
-                }
+                    .catch(function (err) {
+                        console.error(err);
+                    })
+                    .finally(function () {
+                        $('#loader').addClass('hidden');
+                    });
             } else {
-                swal("İşlem İptal Edildi");
+                Swal.fire("İşlem İptal Edildi");
             }
         });
+
+    return false;
+}
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+}
+
+function isStringKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    return ((charCode <= 93 && charCode >= 65) || (charCode <= 122 && charCode >= 97) || charCode == 8) || [350, 351, 304, 286, 287, 231, 199, 305, 214, 246, 220, 252, 32].includes(charCode);
+}
+
+function getPartialView(form, id) {
+    var partialDiv = document.getElementById(id);
+
+    $('#loader').removeClass('hidden');
+
+    $.ajax({
+        type: 'POST',
+        url: form.action,
+        data: new FormData(form),
+        contentType: false,
+        processData: false,
+    })
+        .done(function (res) {
+            $(partialDiv).html(res.html);
+        })
+        .fail(function (err) {
+            console.error(err);
+        })
+        .always(function () {
+            $('#loader').addClass('hidden');
+        });
+
+    return false;
+}
+
+function askBeforeAdd(form, id) {
+    var partialDiv = document.getElementById(id);
+
+    Swal.fire({
+        title: "Ekleme İşlemini Onaylıyor Musunuz?",
+        text: "Bu işlem Geri Alınamaz!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Onayla",
+        cancelButtonText: "İptal",
+    })
+        .then((result) => {
+            if (result.isConfirmed) {
+                $(partialDiv).empty();
+
+                Swal.fire({
+                    title: "İşlem Başarıyla Gerçekleştirildi",
+                    icon: "success",
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        $(partialDiv).html(res.html);
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    },
+                });
+            } else {
+                Swal.fire("İşlem İptal Edildi");
+            }
+        });
+
+    return false;
+}
+
+function askBeforeDelete(form, id) {
+    var partialDiv = document.getElementById(id);
+
+    Swal.fire({
+        title: "Silme İşlemini Onaylıyor Musunuz?",
+        text: "Bu işlem Geri Alınamaz!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Onayla",
+        cancelButtonText: "İptal",
+    })
+        .then((result) => {
+            if (result.isConfirmed) {
+                $(partialDiv).empty();
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        $(partialDiv).html(res.html);
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    },
+                });
+
+                Swal.fire("İşlem Başarıyla Gerçekleştirildi", {
+                    icon: "success",
+                });
+            } else {
+                Swal.fire("İşlem İptal Edildi");
+            }
+        });
+
     return false;
 }
