@@ -50,7 +50,7 @@
                 };
                 options.LoginPath = new PathString("/Account/Account/Login");
                 options.Cookie = cookieBuilder;
-                options.ExpireTimeSpan = TimeSpan.FromHours(12);
+                options.ExpireTimeSpan = TimeSpan.FromDays(12);
                 options.SlidingExpiration = true;
 
 
