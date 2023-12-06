@@ -3,6 +3,10 @@
 <partial name="Partial/_HeadPartial" />
 @await RenderSectionAsync("Css", required: false)
 <body>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="~/Logo/PLMSLogo.svg" alt="AdminLTELogo" height="300" width="300">
+    </div>
     <div class="hold-transition sidebar-mini layout-navbar-fixed">
         <!-- Site wrapper -->
         <div class="wrapper">
@@ -17,7 +21,7 @@
                                 <div class="card mt-3">
                                     <div class="card-header">
                                         <h3 class="card-title" style="font-size:24px">
-                                            <a asp-area="Account" asp-controller="Account" asp-action="UserProfile"><i class="fas fa-chevron-circle-left bg-dark border border-secondary text-white" style="border-radius:50px"></i></a>
+                                            <a asp-action="Index" asp-controller="Home"><i class="fas fa-chevron-circle-left bg-dark border border-secondary text-white" style="border-radius:50px"></i></a>
                                             @ViewContext.RouteData.Values["controller"].ToString() | @ViewContext.RouteData.Values["action"].ToString()
                                         </h3>
 
@@ -58,7 +62,7 @@
                 <!-- Control sidebar content goes here -->
                 <div class="control-sidebar-content">
                     <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <ul class="nav nav-pills nav-sidebar flex-column">
                             <li class="nav-item">
                                 <a asp-area="Account" asp-controller="Account" asp-action="UserProfile" class="nav-link">
                                     <i class="nav-icon fas fa-user"></i>
@@ -87,7 +91,7 @@
                     </nav>
                 </div>
                 <div id="sidebar-overlay"></div>
-
+                
             </aside>
             <!-- /.control-sidebar -->
         </div>
