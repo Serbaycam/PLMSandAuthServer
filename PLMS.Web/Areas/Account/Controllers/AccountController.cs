@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace PLMS.Web.Areas.Account.Controllers
+﻿namespace PLMS.Web.Areas.Account.Controllers
 {
     [Area("Account")]
     [Authorize]
