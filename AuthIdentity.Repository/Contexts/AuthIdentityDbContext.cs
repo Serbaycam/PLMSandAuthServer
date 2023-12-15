@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthIdentity.Repository.Contexts
 {
-    public class AuthIdentityDbContext(DbContextOptions<AuthIdentityDbContext> options) : IdentityDbContext<AuthIdentityUser,AuthIdentityRole,string>(options)
+    public class AuthIdentityDbContext(DbContextOptions<AuthIdentityDbContext> options) : IdentityDbContext<AuthIdentityUser, AuthIdentityRole, string>(options)
     {
     }
 }

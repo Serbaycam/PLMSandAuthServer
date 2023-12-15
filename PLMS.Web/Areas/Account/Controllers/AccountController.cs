@@ -36,7 +36,7 @@
             currentUser.Country = authIdentityUserDto.Country;
             currentUser.Postcode = authIdentityUserDto.Postcode;
             IdentityResult updateResult = await _identityMemberService.UpdateUserByUserAsync(currentUser);
-            if(!updateResult.Succeeded)
+            if (!updateResult.Succeeded)
             {
                 foreach (var error in updateResult.Errors)
                 {

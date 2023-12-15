@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AuthIdentity.Service.Validations
 {
-    public class AuthIdentityUserChangePasswordDtoValidator: AbstractValidator<AuthIdentityUserChangePasswordDto>
+    public class AuthIdentityUserChangePasswordDtoValidator : AbstractValidator<AuthIdentityUserChangePasswordDto>
     {
         public AuthIdentityUserChangePasswordDtoValidator()
         {

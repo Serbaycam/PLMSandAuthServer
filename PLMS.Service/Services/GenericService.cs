@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace PLMS.Service.Services
 {
-    public class GenericService<TEntity,TContext>(IGenericRepository<TEntity, TContext> genericRepository, IUnitOfWork<TContext> unitOfWork) : IGenericService<TEntity,TContext>
+    public class GenericService<TEntity, TContext>(IGenericRepository<TEntity, TContext> genericRepository, IUnitOfWork<TContext> unitOfWork) : IGenericService<TEntity, TContext>
         where TEntity : class
         where TContext : DbContext
     {
@@ -55,7 +55,7 @@ namespace PLMS.Service.Services
 
         public void UpdateRange(IEnumerable<TEntity> entities)
         {
-           _genericRepository.UpdateRange(entities);
+            _genericRepository.UpdateRange(entities);
             _unitOfWork.Commit();
         }
 

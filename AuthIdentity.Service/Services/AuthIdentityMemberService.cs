@@ -69,7 +69,7 @@ namespace AuthIdentity.Service.Services
 
         public async Task<bool> CheckPasswordAsync(AuthIdentityUser authIdentityUser, string password)
         {
-            
+
             return await _userManager.CheckPasswordAsync(authIdentityUser, password);
         }
 

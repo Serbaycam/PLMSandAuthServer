@@ -4,7 +4,7 @@
     {
         public AuthIdentityUserLoginDto()
         {
-            
+
         }
         public AuthIdentityUserLoginDto(string email, string password, bool rememberMe)
         {

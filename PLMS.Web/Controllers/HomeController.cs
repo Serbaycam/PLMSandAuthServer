@@ -5,8 +5,8 @@
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMapper mapper;
-        private readonly IGenericService<Product, PLMSDbContext> genericService;
-        public HomeController(ILogger<HomeController> logger, IGenericService<Product, PLMSDbContext> genericService, IMapper mapper)
+        private readonly IGenericService<SizeSet, PLMSDbContext> genericService;
+        public HomeController(ILogger<HomeController> logger, IGenericService<SizeSet, PLMSDbContext> genericService, IMapper mapper)
         {
             _logger = logger;
             this.genericService = genericService;

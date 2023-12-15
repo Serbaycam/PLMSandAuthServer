@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace PLMS.Repository.Repositories
 {
-    public class GenericRepository<TEntity, TContext>(TContext context) : IGenericRepository<TEntity,TContext>
+    public class GenericRepository<TEntity, TContext>(TContext context) : IGenericRepository<TEntity, TContext>
         where TEntity : class
         where TContext : DbContext
     {
@@ -34,7 +34,7 @@ namespace PLMS.Repository.Repositories
 
         public void Remove(TEntity entity)
         {
-           _dbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
@@ -49,7 +49,7 @@ namespace PLMS.Repository.Repositories
 
         public void UpdateRange(IEnumerable<TEntity> entities)
         {
-           _dbSet.UpdateRange(entities);
+            _dbSet.UpdateRange(entities);
         }
 
         public async Task<IEnumerable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate)
