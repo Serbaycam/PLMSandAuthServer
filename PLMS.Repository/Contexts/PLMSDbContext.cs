@@ -11,6 +11,7 @@ namespace PLMS.Repository.Contexts
         DbSet<SizeSet> SizeSets { get; set; }
         DbSet<Size> Sizes { get; set; }
         DbSet<ModelGroup> ModelGroups { get; set; }
+        DbSet<Model> Models { get; set; }
 
         public override int SaveChanges()
         {
