@@ -50,8 +50,10 @@ $(document).ready(function () {
 
     if (dataTableElement[0]) {
         (async function () {
-            const buttonConfig = await fetchJson("../js/DataTableSettings.Buttons.json");
-            const languageConfig = await fetchJson("../js/DataTableSettings.Language.json");
+            const [buttonConfig, languageConfig] = await Promise.all([
+                fetchJson("../js/DataTableSettings.Buttons.json"),
+                fetchJson("../js/DataTableSettings.Language.json")
+            ]);
 
             dataTableElement.DataTable({
                 responsive: true,
