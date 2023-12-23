@@ -24,9 +24,10 @@ async function fetchJson(url) {
 async function DataTableJS(id, title) {
     var table = document.getElementById(id);
 
-    const [buttonConfig, languageConfig] = await Promise.all([
+    const [buttonConfig, languageConfig, domConfig] = await Promise.all([
         fetchJson("../js/DataTableSettings.Buttons.json"),
-        fetchJson("../js/DataTableSettings.Language.json")
+        fetchJson("../js/DataTableSettings.Language.json"),
+        fetchJson("../js/DataTableSettings.Dom.json")
     ]);
 
     $(table).DataTable({
@@ -34,9 +35,7 @@ async function DataTableJS(id, title) {
         autoWidth: true,
         colReorder: true,
         pageLength: 5,
-        dom: "<'row' <'col-sm-4'B> <'col-sm-4'<'toolbar'>> <'col-sm-4'f> >" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        dom: domConfig,
         buttons: buttonConfig,
         language: languageConfig,
         fnInitComplete: function () {
@@ -44,15 +43,67 @@ async function DataTableJS(id, title) {
         },
     });
 }
+$(document).ready(async function () {
+    const dataTableElement = $('.dataTableJSC');
+    dataTableElement.on('dblclick', 'tbody tr', function (e) {
+        e.currentTarget.classList.toggle('selected');
+    });
+    $('.dataTableJSC thead tr')
+        .clone(true)
+        .addClass('filters')
+        .removeClass('bg-secondary')
+        .appendTo('.dataTableJSC thead');
+    const filtersTh = $('.filters th');
 
+    if (dataTableElement.length > 0) {
+        const [buttonConfig, languageConfig, domConfig] = await Promise.all([
+            fetchJson("../js/DataTableSettings.Buttons.json"),
+            fetchJson("../js/DataTableSettings.Language.json"),
+            fetchJson("../js/DataTableSettings.Dom.json")
+        ]);
+
+        dataTableElement.DataTable({
+            orderCellsTop: true,
+            fixedHeader: true,
+            responsive: true,
+            autoWidth: true,
+            colReorder: true,
+            pageLength: 5,
+            dom: domConfig,
+            buttons: buttonConfig,
+            language: languageConfig,
+            initComplete: function () {
+                var api = this.api();
+
+                api.columns().eq(0).each(function (colIdx) {
+                    var cell = filtersTh.eq(api.column(colIdx).index());
+                    var title = cell.text();
+                    cell.html(`<input class="form-control small" style="width:100px;" type="text" placeholder="${title}" />`);
+
+                    var input = $('input', cell);
+
+                    input.on('change', function () {
+                        $(this).attr('title', $(this).val());
+                        var regexr = '({search})';
+                        api.column(colIdx).search(this.value !== '' ? regexr.replace('{search}', `(((${this.value})))`) : '', this.value !== '', this.value === '').draw();
+                    }).on('keyup', function (e) {
+                        e.stopPropagation();
+                        $(this).trigger('change').focus()[0].setSelectionRange(this.selectionStart, this.selectionStart);
+                    });
+                });
+            },
+        });
+    }
+});
 $(document).ready(function () {
     const dataTableElement = $('.dataTableJS');
 
     if (dataTableElement[0]) {
         (async function () {
-            const [buttonConfig, languageConfig] = await Promise.all([
+            const [buttonConfig, languageConfig,domConfig] = await Promise.all([
                 fetchJson("../js/DataTableSettings.Buttons.json"),
-                fetchJson("../js/DataTableSettings.Language.json")
+                fetchJson("../js/DataTableSettings.Language.json"),
+                fetchJson("../js/DataTableSettings.Dom.json")
             ]);
 
             dataTableElement.DataTable({
@@ -60,9 +111,7 @@ $(document).ready(function () {
                 autoWidth: true,
                 colReorder: true,
                 pageLength: 5,
-                dom: "<'row'<'col-md-6'B><'col-md-6'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-md-5'i><'col-md-7'p>>",
+                dom: domConfig,
                 buttons: buttonConfig,
                 language: languageConfig,
             });
