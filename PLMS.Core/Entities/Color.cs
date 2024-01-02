@@ -2,7 +2,7 @@
 {
     public partial class Color : BaseEntity
     {
-        public string ItemCode { get; set; }
-        public string ItemName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }

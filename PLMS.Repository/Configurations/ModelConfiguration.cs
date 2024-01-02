@@ -4,9 +4,9 @@ using PLMS.Core.Entities;
 
 namespace PLMS.Repository.Configurations
 {
-    public class ModelGroupConfiguration : IEntityTypeConfiguration<ModelGroup>
+    public class ModelConfiguration:IEntityTypeConfiguration<Model>
     {
-        public void Configure(EntityTypeBuilder<ModelGroup> builder)
+        public void Configure(EntityTypeBuilder<Model> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();

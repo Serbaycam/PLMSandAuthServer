@@ -4,8 +4,8 @@ namespace PLMS.Core.Entities
 {
     public partial class ModelGroup : BaseEntity
     {
-        public string ItemCode { get; set; }
-        public string ItemName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public ICollection<Model> Models { get; set; }
     }
 }

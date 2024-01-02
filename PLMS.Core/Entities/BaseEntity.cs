@@ -12,6 +12,10 @@
         public bool IsDeleted { get; set; }
         public string? IsDeletedById { get; set; }
         public DateTime? IsDeletedDate { get; set; }
+        public bool IsDeactived { get; set; }
+        public string? IsDeactivedById { get; set; }
+        public DateTime? IsDeactivedDate { get; set; }
+
 
     }
 }
