@@ -29,9 +29,6 @@
             });
         }
 
-#pragma warning disable CA1041 // Provide ObsoleteAttribute message
-        [Obsolete]
-#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public static void AddFluentValidationWithExt(this IServiceCollection services)
         {
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
@@ -63,15 +60,30 @@
             services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
         }
 
-#pragma warning disable CA1041 // Provide ObsoleteAttribute message
-        [Obsolete]
-#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public static void AddNotifyWithExt(this IServiceCollection services)
         {
             services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
             {
                 ProgressBar = true,
                 Timeout = 10000
+            });
+        }
+
+        public static void AddDbContexesWithExt(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            services.AddDbContext<AuthIdentityDbContext>(x =>
+            {
+                x.UseSqlServer(builder.Configuration.GetConnectionString("AuthIdentityConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AuthIdentityDbContext)).GetName().Name);
+                });
+            });
+            services.AddDbContext<PLMSDbContext>(x =>
+            {
+                x.UseSqlServer(builder.Configuration.GetConnectionString("PLMSConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(PLMSDbContext)).GetName().Name);
+                });
             });
         }
     }

@@ -2,7 +2,6 @@ namespace PLMS.Web
 {
     public class Program
     {
-        [Obsolete]
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -10,27 +9,13 @@ namespace PLMS.Web
             builder.Services.AddFluentValidationWithExt();
             builder.Services.AddNotifyWithExt();
             builder.Services.AddAutoMapperWithExt();
-            builder.Services.RegisterDataTables();
 
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false)
                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 ;
-            builder.Services.AddDbContext<AuthIdentityDbContext>(x =>
-            {
-                x.UseSqlServer(builder.Configuration.GetConnectionString("AuthIdentityConnection"), option =>
-                {
-                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AuthIdentityDbContext)).GetName().Name);
-                });
-            });
-            builder.Services.AddDbContext<PLMSDbContext>(x =>
-            {
-                x.UseSqlServer(builder.Configuration.GetConnectionString("PLMSConnection"), option =>
-                {
-                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(PLMSDbContext)).GetName().Name);
-                });
-            });
+            builder.Services.AddDbContexesWithExt(builder);
             builder.Services.AddConfigureSecurityStampWithExt();
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new RepoServiceModule()));

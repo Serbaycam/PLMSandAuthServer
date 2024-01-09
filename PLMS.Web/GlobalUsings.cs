@@ -7,7 +7,6 @@ global using AuthIdentity.Service.Validations;
 global using Autofac;
 global using Autofac.Extensions.DependencyInjection;
 global using AutoMapper;
-global using DataTables.AspNet.AspNetCore;
 global using FluentValidation.AspNetCore;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Builder;
