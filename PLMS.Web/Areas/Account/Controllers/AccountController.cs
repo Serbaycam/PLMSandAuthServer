@@ -54,8 +54,13 @@
         #region Login Method
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            returnUrl ??= "/Home/Index";
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect(returnUrl);
+            }
             return View(new AuthIdentityUserLoginDto());
         }
         [AllowAnonymous]
@@ -85,8 +90,13 @@
         #region Register Method
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl = null)
         {
+            returnUrl ??= "/Home/Index";
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect(returnUrl);
+            }
             return View(new AuthIdentityUserRegisterDto());
         }
         [AllowAnonymous]
