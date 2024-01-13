@@ -11,6 +11,17 @@
             List<AuthIdentityRole> roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
+        [HttpGet]
+        public async Task<IActionResult> RoleAdd(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RoleAdd(AuthIdentityRole role)
+        {
+            throw new NotImplementedException();
+        }
 
         [HttpGet]
         public async Task<IActionResult> RoleDelete(string id)
