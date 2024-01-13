@@ -1,4 +1,5 @@
-﻿using NToastNotify;
+﻿using Humanizer;
+using NToastNotify;
 
 namespace PLMS.Web.Areas.Admin.Controllers
 {
@@ -13,8 +14,7 @@ namespace PLMS.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Roles()
         {
-            List<AuthIdentityRole> roles = await _roleManager.Roles.ToListAsync();
-            return View(roles);
+            return View(await _roleService.GetAllRolesAsync());
         }
         [HttpGet]
         public async Task<IActionResult> RoleAdd()
@@ -28,7 +28,7 @@ namespace PLMS.Web.Areas.Admin.Controllers
             var result = await _roleService.CreateRoleAsync(dto);
             if (result.Succeeded)
             {
-                _toastNotification.AddSuccessToastMessage("successfully Role Added");
+                _toastNotification.AddSuccessToastMessage("Successfully Role Added");
                 return RedirectToAction(nameof(Roles));
             }
             else
@@ -42,7 +42,7 @@ namespace PLMS.Web.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> RoleDelete(AuthIdentityRole role)
+        public async Task<IActionResult> RoleDelete(string id)
         {
             throw new NotImplementedException();
         }
@@ -50,13 +50,28 @@ namespace PLMS.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> RoleModify(string id)
         {
-            return await Task.Run(View);
+            AuthIdentityRoleModifyDto role = await _roleService.GetRoleByIdAsync(id);
+            return View(role);
         }
 
         [HttpPost]
-        public async Task<IActionResult> RoleModify(AuthIdentityRole role)
+        public async Task<IActionResult> RoleModify(AuthIdentityRoleModifyDto role)
         {
-            throw new NotImplementedException();
+
+            var result = await _roleService.ModifyRoleAsync(role);
+            if (result.Succeeded)
+            {
+                _toastNotification.AddSuccessToastMessage("Successfully Role Modified");
+                return RedirectToAction(nameof(Roles));
+            }
+            else
+            {
+                foreach (IdentityError item in result.Errors)
+                {
+                    _toastNotification.AddErrorToastMessage(item.Description);
+                }
+                return View(role);
+            }
         }
     }
 }

@@ -23,11 +23,11 @@
                             <tr>
                                 <td>@role.Name</td>
                                 <td class="text-center">
-                                    <form class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@role.Id">
-                                        <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil text-info"></i></button>
+                                    <form method="get" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@role.Id">
+                                        <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil"></i></button>
                                     </form>
                                     <form class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleDelete" asp-route-id="@role.Id">
-                                        <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash text-danger"></i></button>
+                                        <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
