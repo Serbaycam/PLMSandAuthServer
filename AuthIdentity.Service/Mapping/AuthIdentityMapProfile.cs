@@ -11,9 +11,6 @@ namespace AuthIdentity.Service.Mapping
             CreateMap<AuthIdentityUser, AuthIdentityUserLoginDto>().ReverseMap();
             CreateMap<AuthIdentityUser, AuthIdentityUserRegisterDto>().ReverseMap();
             CreateMap<AuthIdentityUser, AuthIdentityUserDto>().ReverseMap();
-            CreateMap<AuthIdentityRole, AuthIdentityRoleAddDto>().ReverseMap();
-            CreateMap<AuthIdentityRole, AuthIdentityRoleModifyDto>().ReverseMap();
-            CreateMap<AuthIdentityRole, AuthIdentityRoleDeleteDto>().ReverseMap();
             CreateMap<AuthIdentityRole, AuthIdentityRoleDto>().ReverseMap();
         }
     }

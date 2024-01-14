@@ -6,11 +6,10 @@ namespace AuthIdentity.Core.Services
 {
     public interface IAuthIdentityRoleService
     {
-        Task<IdentityResult> CreateRoleAsync(AuthIdentityRoleAddDto dto);
+        Task<IdentityResult> CreateRoleAsync(AuthIdentityRoleDto dto);
         Task<List<AuthIdentityRoleDto>> GetRoleDtoListAllRolesAsync();
-        Task<AuthIdentityRoleModifyDto> GetRoleModifyDtoAsync(string roleId);
-        Task<AuthIdentityRoleDeleteDto> GetRoleDeleteDtoAsync(string roleId);
-        Task<IdentityResult> ModifyRoleAsync(AuthIdentityRoleModifyDto dto);
-        Task<IdentityResult> DeleteRoleAsync(AuthIdentityRoleDeleteDto dto);
+        Task<AuthIdentityRoleDto> GetRoleDtoByIdAsync(string roleId);
+        Task<IdentityResult> ModifyRoleAsync(AuthIdentityRoleDto dto);
+        Task<IdentityResult> DeleteRoleAsync(AuthIdentityRoleDto dto);
     }
 }

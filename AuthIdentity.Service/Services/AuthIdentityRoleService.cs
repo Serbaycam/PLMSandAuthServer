@@ -12,14 +12,22 @@ namespace AuthIdentity.Service.Services
         private readonly RoleManager<AuthIdentityRole> _roleManager = roleManager;
         private readonly IMapper _mapper = mapper;
 
-        public Task<IdentityResult> CreateRoleAsync(AuthIdentityRoleAddDto dto)
+        public Task<IdentityResult> CreateRoleAsync(AuthIdentityRoleDto dto)
         {
-            return _roleManager.CreateAsync(_mapper.Map<AuthIdentityRole>(dto));
+            AuthIdentityRole role = new AuthIdentityRole { Name = dto.Name };
+            return _roleManager.CreateAsync(role);
         }
 
-        public async Task<IdentityResult> DeleteRoleAsync(AuthIdentityRoleDeleteDto dto)
+        public async Task<IdentityResult> DeleteRoleAsync(AuthIdentityRoleDto dto)
         {
-            return await _roleManager.DeleteAsync(_mapper.Map<AuthIdentityRole>(dto));
+            AuthIdentityRole role = await _roleManager.FindByIdAsync(dto.Id);
+            return await _roleManager.DeleteAsync(role);
+        }
+        public async Task<IdentityResult> ModifyRoleAsync(AuthIdentityRoleDto dto)
+        {
+            AuthIdentityRole role = await _roleManager.FindByIdAsync(dto.Id);
+            role.Name = dto.Name;
+            return await _roleManager.UpdateAsync(role);
         }
 
         public async Task<List<AuthIdentityRoleDto>> GetRoleDtoListAllRolesAsync()
@@ -27,18 +35,11 @@ namespace AuthIdentity.Service.Services
             return _mapper.Map<List<AuthIdentityRoleDto>>(await _roleManager.Roles.AsNoTracking().ToListAsync());
         }
 
-        public async Task<AuthIdentityRoleModifyDto> GetRoleModifyDtoAsync(string roleId)
+        public async Task<AuthIdentityRoleDto> GetRoleDtoByIdAsync(string roleId)
         {
-            return _mapper.Map<AuthIdentityRoleModifyDto>(await _roleManager.FindByIdAsync(roleId));
-        }
-        public async Task<AuthIdentityRoleDeleteDto> GetRoleDeleteDtoAsync(string roleId)
-        {
-            return _mapper.Map<AuthIdentityRoleDeleteDto>(await _roleManager.FindByIdAsync(roleId));
+            return _mapper.Map<AuthIdentityRoleDto>(await _roleManager.FindByIdAsync(roleId));
         }
 
-        public async Task<IdentityResult> ModifyRoleAsync(AuthIdentityRoleModifyDto dto)
-        {
-            return await _roleManager.UpdateAsync(_mapper.Map<AuthIdentityRole>(dto));
-        }
+
     }
 }
