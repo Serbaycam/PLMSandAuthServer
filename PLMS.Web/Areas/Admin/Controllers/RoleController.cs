@@ -11,7 +11,7 @@
         [HttpGet]
         public async Task<IActionResult> Roles()
         {
-            return View(await _roleService.GetAllRolesAsync());
+            return View(await _roleService.GetRoleDtoListAllRolesAsync());
         }
         [HttpGet]
         public async Task<IActionResult> RoleAdd()
@@ -42,7 +42,7 @@
         [HttpGet]
         public async Task<IActionResult> RoleModify(string id)
         {
-            AuthIdentityRoleModifyDto role = await _roleService.GetRoleByIdForModifyAsync(id);
+            AuthIdentityRoleModifyDto role = await _roleService.GetRoleModifyDtoAsync(id);
             return View(role);
         }
 
@@ -67,7 +67,7 @@
         [HttpPost]
         public async Task<IActionResult> RoleDelete(string id)
         {
-            AuthIdentityRoleDeleteDto result = await _roleService.GetRoleByIdForDeleteAsync(id);
+            AuthIdentityRoleDeleteDto result = await _roleService.GetRoleDeleteDtoAsync(id);
             IdentityResult identityResult = await _roleService.DeleteRoleAsync(result);
             if (identityResult.Succeeded)
             {

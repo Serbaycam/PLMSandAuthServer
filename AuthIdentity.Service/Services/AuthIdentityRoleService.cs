@@ -22,16 +22,16 @@ namespace AuthIdentity.Service.Services
             return await _roleManager.DeleteAsync(_mapper.Map<AuthIdentityRole>(dto));
         }
 
-        public async Task<List<AuthIdentityRoleDto>> GetAllRolesAsync()
+        public async Task<List<AuthIdentityRoleDto>> GetRoleDtoListAllRolesAsync()
         {
             return _mapper.Map<List<AuthIdentityRoleDto>>(await _roleManager.Roles.AsNoTracking().ToListAsync());
         }
 
-        public async Task<AuthIdentityRoleModifyDto> GetRoleByIdForModifyAsync(string roleId)
+        public async Task<AuthIdentityRoleModifyDto> GetRoleModifyDtoAsync(string roleId)
         {
             return _mapper.Map<AuthIdentityRoleModifyDto>(await _roleManager.FindByIdAsync(roleId));
         }
-        public async Task<AuthIdentityRoleDeleteDto> GetRoleByIdForDeleteAsync(string roleId)
+        public async Task<AuthIdentityRoleDeleteDto> GetRoleDeleteDtoAsync(string roleId)
         {
             return _mapper.Map<AuthIdentityRoleDeleteDto>(await _roleManager.FindByIdAsync(roleId));
         }
