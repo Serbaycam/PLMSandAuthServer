@@ -1,4 +1,4 @@
-﻿@model List<AuthIdentityRole>
+﻿@model List<AuthIdentityRoleDto>
 @{
     ViewData["Title"] = "Roles";
 }
@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (AuthIdentityRole role in Model)
+                        @foreach (AuthIdentityRoleDto role in Model)
                         {
                             <tr>
                                 <td>@role.Name</td>

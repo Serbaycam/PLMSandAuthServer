@@ -1,4 +1,6 @@
-﻿namespace PLMS.Web.Modules
+﻿using AuthIdentity.Service.Services;
+
+namespace PLMS.Web.Modules
 {
     public class RepoServiceModule : Autofac.Module
     {

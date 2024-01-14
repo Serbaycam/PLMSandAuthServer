@@ -1,7 +1,4 @@
-﻿using Humanizer;
-using NToastNotify;
-
-namespace PLMS.Web.Areas.Admin.Controllers
+﻿namespace PLMS.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
@@ -41,24 +38,18 @@ namespace PLMS.Web.Areas.Admin.Controllers
             }
 
         }
-        [HttpPost]
-        public async Task<IActionResult> RoleDelete(string id)
-        {
-            throw new NotImplementedException();
-        }
 
         [HttpGet]
         public async Task<IActionResult> RoleModify(string id)
         {
-            AuthIdentityRoleModifyDto role = await _roleService.GetRoleByIdAsync(id);
+            AuthIdentityRoleModifyDto role = await _roleService.GetRoleByIdForModifyAsync(id);
             return View(role);
         }
 
         [HttpPost]
         public async Task<IActionResult> RoleModify(AuthIdentityRoleModifyDto role)
         {
-
-            var result = await _roleService.ModifyRoleAsync(role);
+            IdentityResult result = await _roleService.ModifyRoleAsync(role);
             if (result.Succeeded)
             {
                 _toastNotification.AddSuccessToastMessage("Successfully Role Modified");
@@ -71,6 +62,25 @@ namespace PLMS.Web.Areas.Admin.Controllers
                     _toastNotification.AddErrorToastMessage(item.Description);
                 }
                 return View(role);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoleDelete(string id)
+        {
+            AuthIdentityRoleDeleteDto result = await _roleService.GetRoleByIdForDeleteAsync(id);
+            IdentityResult identityResult = await _roleService.DeleteRoleAsync(result);
+            if (identityResult.Succeeded)
+            {
+                _toastNotification.AddSuccessToastMessage("Successfully Role Deleted");
+                return RedirectToAction(nameof(Roles));
+            }
+            else
+            {
+                foreach (IdentityError item in identityResult.Errors)
+                {
+                    _toastNotification.AddErrorToastMessage(item.Description);
+                }
+                return RedirectToAction(nameof(Roles));
             }
         }
     }
