@@ -1,4 +1,41 @@
-﻿@{
+﻿@model List<AuthIdentityUserForAdminDto>
+@{
     ViewData["Title"] = "User List";
 }
+<div class="container-fluid">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <table class="dataTableJS table table-bordered table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th>User Id</th>
+                            <th>User Name</th>
+                            <th>User Email</th>
+                            <th>Modify/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (AuthIdentityUserForAdminDto item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td class="text-center">
+                                    <form method="get" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@item.Id">
+                                        <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil"></i></button>
+                                    </form>
+                                    <form class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleDelete" asp-route-id="@item.Id">
+                                        <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 

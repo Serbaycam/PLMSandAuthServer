@@ -2,16 +2,17 @@
 {
     [Area("Admin")]
     [Authorize]
-    public class AdminController : Controller
+    public class AdminController(IAuthIdentityUserService identityUserService) : Controller
     {
+        private readonly IAuthIdentityUserService _identityUserService = identityUserService;
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult UserList()
+        public async Task<IActionResult> UserList()
         {
-            return View();
+            return View(await _identityUserService.GetAllUsersAsync());
         }
     }
 }

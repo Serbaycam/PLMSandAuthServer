@@ -25,9 +25,9 @@ async function DataTableJS(id, title) {
     var table = document.getElementById(id);
 
     const [buttonConfig, languageConfig, domConfig] = await Promise.all([
-        fetchJson("../js/DataTableSettings.Buttons.json"),
-        fetchJson("../js/DataTableSettings.Language.json"),
-        fetchJson("../js/DataTableSettings.Dom.json")
+        fetchJson("../../js/DataTableSettings.Buttons.json"),
+        fetchJson("../../js/DataTableSettings.Language.json"),
+        fetchJson("../../js/DataTableSettings.Dom.json")
     ]);
 
     $(table).DataTable({
@@ -57,9 +57,9 @@ $(document).ready(async function () {
 
     if (dataTableElement.length > 0) {
         const [buttonConfig, languageConfig, domConfig] = await Promise.all([
-            fetchJson("../js/DataTableSettings.Buttons.json"),
-            fetchJson("../js/DataTableSettings.Language.json"),
-            fetchJson("../js/DataTableSettings.Dom.json")
+            fetchJson("../../js/DataTableSettings.Buttons.json"),
+            fetchJson("../../js/DataTableSettings.Language.json"),
+            fetchJson("../../js/DataTableSettings.Dom.json")
         ]);
 
         dataTableElement.DataTable({
@@ -101,9 +101,9 @@ $(document).ready(function () {
     if (dataTableElement[0]) {
         (async function () {
             const [buttonConfig, languageConfig,domConfig] = await Promise.all([
-                fetchJson("../js/DataTableSettings.Buttons.json"),
-                fetchJson("../js/DataTableSettings.Language.json"),
-                fetchJson("../js/DataTableSettings.Dom.json")
+                fetchJson("../../js/DataTableSettings.Buttons.json"),
+                fetchJson("../../js/DataTableSettings.Language.json"),
+                fetchJson("../../js/DataTableSettings.Dom.json")
             ]);
 
             dataTableElement.DataTable({
