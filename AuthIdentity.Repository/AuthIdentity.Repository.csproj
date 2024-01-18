@@ -20,8 +20,4 @@
     <ProjectReference Include="..\AuthIdentity.Core\AuthIdentity.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
-
 </Project>

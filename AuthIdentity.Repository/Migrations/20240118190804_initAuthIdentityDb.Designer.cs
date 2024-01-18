@@ -4,6 +4,7 @@ using AuthIdentity.Repository.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthIdentity.Repository.Migrations
 {
     [DbContext(typeof(AuthIdentityDbContext))]
-    partial class AuthIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240118190804_initAuthIdentityDb")]
+    partial class initAuthIdentityDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,15 +156,15 @@ namespace AuthIdentity.Repository.Migrations
                         {
                             Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1fc09da4-fc92-4288-b4ef-b44d635041fd",
+                            ConcurrencyStamp = "cd24c922-b01f-4abd-8e55-5883db3bdd84",
                             Email = "Masteradmin@plms.local",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "MasterAdmin",
                             NormalizedUserName = "MASTERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEChYQoScbUWU/2Wsgij6KqNHAeBH3nKZyzrWHeRGez4V3vYwpChc9WJB8VjeU6S2BQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOMDKWiIuOfksUxvdJym3yTpIPShjyaocDbnXRii7VO90Uga8Z++KfT2u8GJwVbNWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "428ca025-58b3-416d-a9c7-dc63f469491b",
+                            SecurityStamp = "92a0f449-8d8c-4f1e-b8f3-67431ec7f6c8",
                             Surname = "MasterAdmin",
                             TwoFactorEnabled = false,
                             UserName = "MasterAdmin"
@@ -253,13 +256,6 @@ namespace AuthIdentity.Repository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
-                            RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

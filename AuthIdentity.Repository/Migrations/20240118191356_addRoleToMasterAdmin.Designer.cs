@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthIdentity.Repository.Migrations
 {
     [DbContext(typeof(AuthIdentityDbContext))]
-    [Migration("20240113093448_initDb")]
-    partial class initDb
+    [Migration("20240118191356_addRoleToMasterAdmin")]
+    partial class addRoleToMasterAdmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -50,6 +50,14 @@ namespace AuthIdentity.Repository.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            Name = "MasterAdmin",
+                            NormalizedName = "MASTERADMIN"
+                        });
                 });
 
             modelBuilder.Entity("AuthIdentity.Core.Entities.AuthIdentityUser", b =>
@@ -142,6 +150,25 @@ namespace AuthIdentity.Repository.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1fc09da4-fc92-4288-b4ef-b44d635041fd",
+                            Email = "Masteradmin@plms.local",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            Name = "MasterAdmin",
+                            NormalizedUserName = "MASTERADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEChYQoScbUWU/2Wsgij6KqNHAeBH3nKZyzrWHeRGez4V3vYwpChc9WJB8VjeU6S2BQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "428ca025-58b3-416d-a9c7-dc63f469491b",
+                            Surname = "MasterAdmin",
+                            TwoFactorEnabled = false,
+                            UserName = "MasterAdmin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -229,6 +256,13 @@ namespace AuthIdentity.Repository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

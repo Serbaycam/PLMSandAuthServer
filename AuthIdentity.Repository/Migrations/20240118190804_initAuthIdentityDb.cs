@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthIdentity.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class initDb : Migration
+    public partial class initAuthIdentityDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -164,6 +164,16 @@ namespace AuthIdentity.Repository.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "341743f0-asd2–42de-afbf-59kmkkmk72cf6", null, "MasterAdmin", "MASTERADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDay", "City", "ConcurrencyStamp", "Country", "Education", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Postcode", "SecurityStamp", "Surname", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "341743f0-asd2–42de-afbf-59kmkkmk72cf6", 0, null, null, null, "cd24c922-b01f-4abd-8e55-5883db3bdd84", null, null, "Masteradmin@plms.local", true, null, false, null, "MasterAdmin", null, "MASTERADMIN", "AQAAAAIAAYagAAAAEOMDKWiIuOfksUxvdJym3yTpIPShjyaocDbnXRii7VO90Uga8Z++KfT2u8GJwVbNWg==", null, false, null, "92a0f449-8d8c-4f1e-b8f3-67431ec7f6c8", "MasterAdmin", false, "MasterAdmin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
