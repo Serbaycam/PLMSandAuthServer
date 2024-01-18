@@ -17,6 +17,8 @@ namespace AuthIdentity.Repository.Configurations
                 UserName = "MasterAdmin",
                 NormalizedUserName = "MASTERADMIN",
                 Email = "Masteradmin@plms.local",
+                NormalizedEmail = "MASTERADMIN@PLMS.LOCAL",
+                ConcurrencyStamp = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
                 EmailConfirmed = true,
                 PasswordHash = passwordHasher.HashPassword(null, "K5yxatfnu+"),
             });

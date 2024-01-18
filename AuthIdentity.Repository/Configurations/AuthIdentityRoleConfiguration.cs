@@ -12,7 +12,8 @@ namespace AuthIdentity.Repository.Configurations
             {
                 Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
                 Name = "MasterAdmin",
-                NormalizedName = "MASTERADMIN"
+                NormalizedName = "MASTERADMIN",
+                ConcurrencyStamp = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
             });
         }
     }
