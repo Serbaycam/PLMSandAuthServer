@@ -21,30 +21,8 @@ async function fetchJson(url) {
     return response.json();
 }
 
-async function DataTableJS(id, title) {
-    var table = document.getElementById(id);
-
-    const [buttonConfig, languageConfig, domConfig] = await Promise.all([
-        fetchJson("../../js/DataTableSettings.Buttons.json"),
-        fetchJson("../../js/DataTableSettings.Language.json"),
-        fetchJson("../../js/DataTableSettings.Dom.json")
-    ]);
-
-    $(table).DataTable({
-        responsive: true,
-        autoWidth: true,
-        colReorder: true,
-        pageLength: 5,
-        dom: domConfig,
-        buttons: buttonConfig,
-        language: languageConfig,
-        fnInitComplete: function () {
-            $('div.toolbar').html(`<h2 class="fw-bolder text-center">${title}</h2>`);
-        },
-    });
-}
 $(document).ready(async function () {
-    const dataTableElement = $('.dataTableJSC');
+    const dataTableElement = $('.dataTableWithColumnFilters');
     dataTableElement.on('dblclick', 'tbody tr', function (e) {
         e.currentTarget.classList.toggle('selected');
     });
@@ -78,7 +56,7 @@ $(document).ready(async function () {
                 api.columns().eq(0).each(function (colIdx) {
                     var cell = filtersTh.eq(api.column(colIdx).index());
                     var title = cell.text();
-                    cell.html(`<input class="form-control small" style="width:100px;" type="text" placeholder="${title}" />`);
+                    cell.html(`<input class="form-control small" type="text" placeholder="${title}" />`);
 
                     var input = $('input', cell);
 
@@ -96,7 +74,7 @@ $(document).ready(async function () {
     }
 });
 $(document).ready(function () {
-    const dataTableElement = $('.dataTableJS');
+    const dataTableElement = $('.dataTableBasic');
 
     if (dataTableElement[0]) {
         (async function () {

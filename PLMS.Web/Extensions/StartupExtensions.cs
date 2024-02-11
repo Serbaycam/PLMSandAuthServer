@@ -1,4 +1,7 @@
-﻿namespace PLMS.Web.Extensions
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
+
+namespace PLMS.Web.Extensions
 {
     public static class StartupExtensions
     {
@@ -31,8 +34,10 @@
 
         public static void AddFluentValidationWithExt(this IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
-            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining(typeof(ProductDtoValidator));
+            services.AddValidatorsFromAssemblyContaining(typeof(AuthIdentityUserRegisterDtoValidator));
 
         }
 
@@ -62,11 +67,7 @@
 
         public static void AddNotifyWithExt(this IServiceCollection services)
         {
-            services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
-            {
-                ProgressBar = true,
-                Timeout = 10000
-            });
+            services.AddMvc().AddNToastNotifyToastr();
         }
 
         public static void AddDbContexesWithExt(this IServiceCollection services, WebApplicationBuilder builder)
