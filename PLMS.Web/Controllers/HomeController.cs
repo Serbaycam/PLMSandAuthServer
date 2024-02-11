@@ -1,17 +1,9 @@
 ﻿namespace PLMS.Web.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IMapper mapper;
-        private readonly IGenericService<Product, PLMSDbContext> genericService;
-        public HomeController(ILogger<HomeController> logger, IGenericService<Product, PLMSDbContext> genericService, IMapper mapper)
-        {
-            _logger = logger;
-            this.genericService = genericService;
-            this.mapper = mapper;
-        }
+        private readonly ILogger<HomeController> _logger = logger;
 
         public IActionResult Index()
         {

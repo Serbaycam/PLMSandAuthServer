@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AuthIdentity.Service.Validations
 {
-    public class AuthIdentityUserDtoValidator:AbstractValidator<AuthIdentityUserDto>
+    public class AuthIdentityUserDtoValidator : AbstractValidator<AuthIdentityUserDto>
     {
         public AuthIdentityUserDtoValidator()
         {

@@ -36,7 +36,7 @@
             currentUser.Country = authIdentityUserDto.Country;
             currentUser.Postcode = authIdentityUserDto.Postcode;
             IdentityResult updateResult = await _identityMemberService.UpdateUserByUserAsync(currentUser);
-            if(!updateResult.Succeeded)
+            if (!updateResult.Succeeded)
             {
                 foreach (var error in updateResult.Errors)
                 {
@@ -54,8 +54,13 @@
         #region Login Method
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            returnUrl ??= "/Home/Index";
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect(returnUrl);
+            }
             return View(new AuthIdentityUserLoginDto());
         }
         [AllowAnonymous]
@@ -85,8 +90,13 @@
         #region Register Method
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl = null)
         {
+            returnUrl ??= "/Home/Index";
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect(returnUrl);
+            }
             return View(new AuthIdentityUserRegisterDto());
         }
         [AllowAnonymous]
@@ -151,6 +161,19 @@
             await _identityMemberService.LogoutAsync();
             await _identityMemberService.LoginAsync(new AuthIdentityUserLoginDto { Email = currentUser.Email, Password = authIdentityUserChangePasswordDto.NewPassword, RememberMe = true });
             return View();
+        }
+        #endregion
+
+        #region AccessDenied
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        #endregion
+        #region ErrorPage
+        public IActionResult Error()
+        {
+               return View();
         }
         #endregion
 

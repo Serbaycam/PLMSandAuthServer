@@ -2,7 +2,7 @@
 
 namespace PLMS.Core.Repositories
 {
-    public interface IGenericRepository<TEntity,TContext> where TEntity : class
+    public interface IGenericRepository<TEntity, TContext> where TEntity : class
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(int id);

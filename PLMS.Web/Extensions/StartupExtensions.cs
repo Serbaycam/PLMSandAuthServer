@@ -1,4 +1,7 @@
-﻿namespace PLMS.Web.Extensions
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
+
+namespace PLMS.Web.Extensions
 {
     public static class StartupExtensions
     {
@@ -29,13 +32,12 @@
             });
         }
 
-#pragma warning disable CA1041 // Provide ObsoleteAttribute message
-        [Obsolete]
-#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public static void AddFluentValidationWithExt(this IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(ProductDtoValidator))));
-            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetAssembly(typeof(AuthIdentityUserRegisterDtoValidator))));
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining(typeof(ProductDtoValidator));
+            services.AddValidatorsFromAssemblyContaining(typeof(AuthIdentityUserRegisterDtoValidator));
 
         }
 
@@ -49,6 +51,7 @@
                     Name = "PLMSWebApp"
                 };
                 options.LoginPath = new PathString("/Account/Account/Login");
+                options.AccessDeniedPath = new PathString("/Account/Account/AccessDenied");
                 options.Cookie = cookieBuilder;
                 options.ExpireTimeSpan = TimeSpan.FromDays(12);
                 options.SlidingExpiration = true;
@@ -63,15 +66,26 @@
             services.AddAutoMapper(Assembly.GetAssembly(typeof(AuthIdentityMapProfile)));
         }
 
-#pragma warning disable CA1041 // Provide ObsoleteAttribute message
-        [Obsolete]
-#pragma warning restore CA1041 // Provide ObsoleteAttribute message
         public static void AddNotifyWithExt(this IServiceCollection services)
         {
-            services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
+            services.AddMvc().AddNToastNotifyToastr();
+        }
+
+        public static void AddDbContexesWithExt(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            services.AddDbContext<AuthIdentityDbContext>(x =>
             {
-                ProgressBar = true,
-                Timeout = 10000
+                x.UseSqlServer(builder.Configuration.GetConnectionString("AuthIdentityConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(AuthIdentityDbContext)).GetName().Name);
+                });
+            });
+            services.AddDbContext<PLMSDbContext>(x =>
+            {
+                x.UseSqlServer(builder.Configuration.GetConnectionString("PLMSConnection"), option =>
+                {
+                    option.MigrationsAssembly(Assembly.GetAssembly(typeof(PLMSDbContext)).GetName().Name);
+                });
             });
         }
     }

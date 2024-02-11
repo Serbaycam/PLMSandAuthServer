@@ -1,38 +1,91 @@
-﻿@model List<AuthIdentityRole>
+﻿@model List<AuthIdentityRoleDto>
 @{
     ViewData["Title"] = "Roles";
 }
-
-@if (Model.Count > 0)
-{
-    <table class="table table-bordered">
-        <thead class="bg-secondary">
-            <tr>
-                <th>Name</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (AuthIdentityRole role in Model)
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <a asp-action="RoleAdd" asp-controller="Role" asp-area="Admin" class="btn btn-outline-info">Add Role</a>
+            </div>
+            @if (Model.Count > 0)
             {
-                <tr>
-                    <td>@role.Name</td>
-                    <td class="text-center">
-                        <form class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@role.Id">
-                            <button type="submit" class="btn"><i class="fa-solid fa-pencil text-info"></i></button>
-                        </form>
-                        <form class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleDelete" asp-route-id="@role.Id">
-                            <button type="submit" class="btn"><i class="fa-solid fa-trash text-danger"></i></button>
-                        </form>
-                    </td>
-                </tr>
+                <table class="table table-bordered col-12 mt-3">
+                    <thead class="bg-secondary">
+                        <tr>
+                            <th class="w-72">Name</th>
+                            <th class="w-25">Modify/Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (AuthIdentityRoleDto role in Model)
+                        {
+                            <tr>
+                                <td>@role.Name</td>
+                                <td class="text-center">
+                                    <form method="get" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@role.Id">
+                                        <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil"></i></button>
+                                    </form>
+                                    <form onsubmit="return AskForRoleDelete()" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleDelete" asp-route-id="@role.Id">
+                                        <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="alert alert-danger" role="alert">
-        Careful.. No roles here ?
+            else
+            {
+                <div class="col-md-4 col-sm-6 col-8 mt-3 float-left">
+                    <div class="alert alert-danger" role="alert">
+                        Careful.. No roles here ?
+                    </div>
+                </div>
+            }
+        </div>
+
     </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function AskForRoleDelete() {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+
+            // 'then' bloğu içinde 'return' kullanmadan direkt olarak form submit edebilirsiniz
+            swalWithBootstrapButtons.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Silme işlemi onaylandı, formu submit et
+                    document.forms[2].submit();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Silme işlemi iptal edildi
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Role is safe",
+                        icon: "error"
+                    });
+                }
+            });
+
+            // Formu submit etme, çünkü işlem asenkron olabilir ve 'return' ifadesini burada kullanamayabilirsiniz
+            return false;
+        };
+    </script>
+
+
+
 }

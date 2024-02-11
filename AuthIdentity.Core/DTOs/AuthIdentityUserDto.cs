@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace AuthIdentity.Core.DTOs
+﻿namespace AuthIdentity.Core.DTOs
 {
-	public class AuthIdentityUserDto
-	{
-		public string Name { get; set; }
-		public string Surname { get; set; }
-		public string Email { get; set; }
+    public class AuthIdentityUserDto
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public int Postcode { get; set; }

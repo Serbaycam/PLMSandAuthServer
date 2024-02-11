@@ -21,7 +21,7 @@
                                 <div class="card mt-3">
                                     <div class="card-header">
                                         <h3 class="card-title" style="font-size:24px">
-                                            <a asp-action="Index" asp-controller="Home"><i class="fas fa-chevron-circle-left bg-dark border border-secondary text-white" style="border-radius:50px"></i></a>
+                                            <a asp-action="Index" asp-controller="Home" asp-area=""><i class="fas fa-chevron-circle-left bg-dark border border-secondary text-white" style="border-radius:50px"></i></a>
                                             @ViewContext.RouteData.Values["controller"].ToString() | @ViewContext.RouteData.Values["action"].ToString()
                                         </h3>
 
@@ -63,6 +63,14 @@
                 <div class="control-sidebar-content">
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column">
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Admin
+                                    </p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a asp-area="Account" asp-controller="Account" asp-action="UserProfile" class="nav-link">
                                     <i class="nav-icon fas fa-user"></i>

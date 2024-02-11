@@ -2,7 +2,7 @@
 
 namespace AuthIdentity.Core.Entities
 {
-    public class AuthIdentityRole:IdentityRole
+    public class AuthIdentityRole : IdentityRole
     {
     }
 }

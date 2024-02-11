@@ -1,4 +1,6 @@
-﻿namespace PLMS.Web.Modules
+﻿using AuthIdentity.Service.Services;
+
+namespace PLMS.Web.Modules
 {
     public class RepoServiceModule : Autofac.Module
     {
@@ -8,12 +10,6 @@
             builder.RegisterGeneric(typeof(GenericRepository<,>)).As(typeof(IGenericRepository<,>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(GenericService<,>)).As(typeof(IGenericService<,>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(UnitOfWork<>)).As(typeof(IUnitOfWork<>)).InstancePerLifetimeScope();
-
-            builder.RegisterGeneric(typeof(AuthIdentityGenericRepository<,>)).As(typeof(IAuthIdentityGenericRepository<,>)).InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(AuthIdentityGenericService<,>)).As(typeof(IAuthIdentityGenericService<,>)).InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(AuthIdentityUnitOfWork<>)).As(typeof(IAuthIdentityUnitOfWork<>)).InstancePerLifetimeScope();
-
-
 
             var apiAssembly = Assembly.GetExecutingAssembly();
             var repoAssembly = Assembly.GetAssembly(typeof(PLMSDbContext));

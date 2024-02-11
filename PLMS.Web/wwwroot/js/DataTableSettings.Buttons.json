@@ -1,7 +1,7 @@
 [
   {
     "extend": "collection",
-    "text": "Export",
+    "text": "Aktar",
     "className": "btn bg-light text-black",
     "buttons": [
       {

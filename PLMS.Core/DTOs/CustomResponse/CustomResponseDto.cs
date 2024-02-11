@@ -16,13 +16,13 @@ namespace PLMS.Core.DTOs.CustomResponse
         {
             return new CustomResponseDTO<T> { StatusCode = statusCode };
         }
-        public static CustomResponseDTO<T> Fail(int statusCode,List<string> errors)
+        public static CustomResponseDTO<T> Fail(int statusCode, List<string> errors)
         {
-            return new CustomResponseDTO<T> { StatusCode = statusCode,Errors=errors };
+            return new CustomResponseDTO<T> { StatusCode = statusCode, Errors = errors };
         }
         public static CustomResponseDTO<T> Fail(int statusCode, string error)
         {
-            return new CustomResponseDTO<T> { StatusCode = statusCode, Errors = new List<string>{ error} };
+            return new CustomResponseDTO<T> { StatusCode = statusCode, Errors = new List<string> { error } };
         }
 
     }

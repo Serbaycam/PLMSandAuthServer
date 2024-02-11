@@ -2,7 +2,7 @@
 
 namespace PLMS.Core.Services
 {
-    public interface IGenericService<TEntity,TContext> where TEntity : class
+    public interface IGenericService<TEntity, TContext> where TEntity : class
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(int id);
