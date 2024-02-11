@@ -1,7 +1,7 @@
 ﻿namespace PLMS.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "MasterAdmin,Admin")]
     public class RoleController(RoleManager<AuthIdentityRole> roleManager, IAuthIdentityRoleService roleService, IToastNotification toastNotification) : Controller
     {
         private readonly RoleManager<AuthIdentityRole> _roleManager = roleManager;

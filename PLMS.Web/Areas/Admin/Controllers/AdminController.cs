@@ -1,7 +1,7 @@
 ﻿namespace PLMS.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles ="MasterAdmin,Admin")]
     public class AdminController(IAuthIdentityUserService identityUserService) : Controller
     {
         private readonly IAuthIdentityUserService _identityUserService = identityUserService;

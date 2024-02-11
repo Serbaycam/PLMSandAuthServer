@@ -164,5 +164,18 @@
         }
         #endregion
 
+        #region AccessDenied
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        #endregion
+        #region ErrorPage
+        public IActionResult Error()
+        {
+               return View();
+        }
+        #endregion
+
     }
 }

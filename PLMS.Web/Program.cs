@@ -30,7 +30,12 @@ namespace PLMS.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            else
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute("/Account/Account/Error");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -38,7 +43,6 @@ namespace PLMS.Web
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseNToastNotify();
-
 
             app.MapRazorPages();
 
