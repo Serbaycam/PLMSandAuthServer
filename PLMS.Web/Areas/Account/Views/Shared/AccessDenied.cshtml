@@ -2,89 +2,54 @@
     ViewData["Title"] = "AccessDenied";
 }
 @section Css {
-    <style type="text/css">
-        .text-ctn {
-            margin: 18px;
+    <style>
+
+        h1, a {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
         }
 
-        .marquee {
-            width: 360px;
-            border-bottom: 3px solid #000000;
-            background-color: #000000;
-            white-space: nowrap;
+        .section {
+            padding: 4rem 2rem;
         }
 
-        .marquee-text {
+            .section .error {
+                font-size: 150px;
+                color: #008B62;
+                text-shadow: 1px 1px 1px #00593E, 2px 2px 1px #00593E, 3px 3px 1px #00593E, 4px 4px 1px #00593E, 5px 5px 1px #00593E, 6px 6px 1px #00593E, 7px 7px 1px #00593E, 8px 8px 1px #00593E, 25px 25px 8px rgba(0,0,0, 0.2);
+            }
+
+        .page {
+            margin: 2rem 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .back-home {
             display: inline-block;
-            width: 260px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff0000;
-            animation: scroll 3s linear infinite;
+            border: 2px solid #222;
+            color: #222;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 0.75rem 1rem 0.6rem;
+            transition: all 0.2s linear;
+            box-shadow: 0 3px 8px rgba(0,0,0, 0.3);
         }
 
-            .marquee-text:before {
-                content: "ACCESS DENIED";
+            .back-home:hover {
+                background: #222;
+                color: #ddd;
             }
-
-        #sec-1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #ff0000;
-        }
-
-        #ctn {
-            margin-top: 40px;
-            width: 360px;
-            height: 360px;
-            font-size: 30px;
-            font-weight: bold;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        #forbidden {
-            display: inline-block;
-            padding: 5px 10px 5px 10px;
-            border: 2px solid #000000;
-            border-radius: 8px;
-            font-size: 50px;
-            animation: flash 1s linear infinite;
-        }
-
-        @@keyframes scroll {
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-
-        @@keyframes flash {
-            50% {
-                opacity: 0;
-            }
-        }
     </style>
 }
-<div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <div id="sec-1" class="section rounded">
-                <div id="ctn">
-                    <div class="marquee">
-                        <div class="marquee-text"></div><div class="marquee-text"></div><div class="marquee-text"></div>
-                    </div>
 
-                    <div class="text-ctn">ERROR</div>
 
-                    <div id="forbidden">FORBIDDEN</div>
 
-                    <div class="text-ctn">HTTP<br>403</div>
-
-                    
-                </div>
-            </div>
-
-        </div>
-    </div>
+<div class="section text-center">
+    <h1 class="error">403</h1>
+    <div class="page">Ooops!!! Access Denied</div>
+    <a class="back-home" asp-area="" asp-controller="Home" asp-action="Index">Back to home</a>
 </div>
+

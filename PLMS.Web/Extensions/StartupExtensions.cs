@@ -52,7 +52,6 @@ namespace PLMS.Web.Extensions
                 };
                 options.LoginPath = new PathString("/Account/Account/Login");
                 options.AccessDeniedPath = new PathString("/Account/Account/AccessDenied");
-                options.ReturnUrlParameter = "returnUrl";
                 options.Cookie = cookieBuilder;
                 options.ExpireTimeSpan = TimeSpan.FromDays(12);
                 options.SlidingExpiration = true;

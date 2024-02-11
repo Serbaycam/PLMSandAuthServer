@@ -11,7 +11,9 @@
                         <tr>
                             <th>User Id</th>
                             <th>User Name</th>
+                            <th>User Surname</th>
                             <th>User Email</th>
+                            <th>Roles</th>
                             <th>Modify/Delete</th>
                         </tr>
                     </thead>
@@ -21,7 +23,14 @@
                             <tr>
                                 <td>@item.Id</td>
                                 <td>@item.Name</td>
+                                <td>@item.Surname</td>
                                 <td>@item.Email</td>
+                                <td>
+                                    @foreach (var role in item.Roles)
+                                    {
+                                        <span class="badge bg-secondary">@role</span>
+                                    }
+                                </td>
                                 <td class="text-center">
                                     <form method="get" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@item.Id">
                                         <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil"></i></button>
