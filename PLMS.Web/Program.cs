@@ -35,7 +35,7 @@ namespace PLMS.Web
                 app.UseDeveloperExceptionPage();
             }
             app.UseStatusCodePages();
-            app.UseStatusCodePagesWithReExecute("/Account/Account/Error");
+            app.UseStatusCodePagesWithReExecute("/ErrorAndDenied/Error");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

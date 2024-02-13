@@ -20,6 +20,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RoleAdd(AuthIdentityRoleDto dto)
         {
             var result = await _roleService.CreateRoleAsync(dto);
@@ -47,6 +48,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RoleModify(AuthIdentityRoleDto role)
         {
             IdentityResult result = await _roleService.ModifyRoleAsync(role);
@@ -65,6 +67,7 @@
             }
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RoleDelete(string id)
         {
             AuthIdentityRoleDto result = await _roleService.GetRoleDtoByIdAsync(id);

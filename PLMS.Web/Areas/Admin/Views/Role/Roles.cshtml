@@ -27,6 +27,7 @@
                                         <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil"></i></button>
                                     </form>
                                     <form onsubmit="return AskForRoleDelete()" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleDelete" asp-route-id="@role.Id">
+                                        @Html.AntiForgeryToken()
                                         <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </td>

@@ -51,7 +51,7 @@ namespace PLMS.Web.Extensions
                     Name = "PLMSWebApp"
                 };
                 options.LoginPath = new PathString("/Account/Account/Login");
-                options.AccessDeniedPath = new PathString("/Account/Account/AccessDenied");
+                options.AccessDeniedPath = new PathString("/ErrorAndDenied/AccessDenied");
                 options.Cookie = cookieBuilder;
                 options.ExpireTimeSpan = TimeSpan.FromDays(12);
                 options.SlidingExpiration = true;

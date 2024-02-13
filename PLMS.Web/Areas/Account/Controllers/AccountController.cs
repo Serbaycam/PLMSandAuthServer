@@ -20,6 +20,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserProfile(AuthIdentityUserDto authIdentityUserDto)
         {
             if (!ModelState.IsValid)
@@ -65,6 +66,7 @@
         }
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(AuthIdentityUserLoginDto authIdentityUserLoginDto, string returnUrl = null)
         {
             returnUrl ??= "/Home/Index";
@@ -101,6 +103,7 @@
         }
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(AuthIdentityUserRegisterDto authIdentityUserRegisterDto)
         {
             if (!ModelState.IsValid)
@@ -136,6 +139,7 @@
             return View(new AuthIdentityUserChangePasswordDto());
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(AuthIdentityUserChangePasswordDto authIdentityUserChangePasswordDto)
         {
             if (!ModelState.IsValid)
@@ -163,19 +167,5 @@
             return View();
         }
         #endregion
-
-        #region AccessDenied
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-        #endregion
-        #region ErrorPage
-        public IActionResult Error()
-        {
-               return View();
-        }
-        #endregion
-
     }
 }

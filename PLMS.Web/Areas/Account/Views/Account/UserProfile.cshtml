@@ -3,7 +3,7 @@
     ViewData["Title"] = "User Profile";
 }
 <form asp-area="Account" asp-controller="Account" asp-action="UserProfile" method="post">
-
+    @Html.AntiForgeryToken()
 
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
