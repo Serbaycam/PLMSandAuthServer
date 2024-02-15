@@ -87,5 +87,15 @@ namespace AuthIdentity.Service.Services
         {
             return await _userManager.UpdateAsync(authIdentityUser);
         }
+
+        public async Task<IdentityResult> DeleteUserByUserAsync(AuthIdentityUser user)
+        {
+            return await _userManager.DeleteAsync(user);
+        }
+
+        public async Task<AuthIdentityUser> GetUserByIdAsync(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
+        }
     }
 }

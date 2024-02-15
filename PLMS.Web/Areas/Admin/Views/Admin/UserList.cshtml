@@ -32,10 +32,11 @@
                                     }
                                 </td>
                                 <td class="text-center">
-                                    <form method="get" class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleModify" asp-route-id="@item.Id">
+                                    <form method="get" class="d-inline" asp-area="Admin" asp-controller="Admin" asp-action="UserModify" asp-route-id="@item.Id">
                                         <button type="submit" class="btn btn-outline-info"><i class="fa-solid fa-pencil"></i></button>
                                     </form>
-                                    <form class="d-inline" asp-area="Admin" asp-controller="Role" asp-action="RoleDelete" asp-route-id="@item.Id">
+                                    <form onsubmit="return AskForRoleDelete()" method="post" class="d-inline" asp-area="Admin" asp-controller="Admin" asp-action="UserDelete" asp-route-id="@item.Id">
+                                        @Html.AntiForgeryToken()
                                         <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
                                     </form>
                                 </td>
@@ -47,4 +48,46 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        function AskForRoleDelete() {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+
+            // 'then' bloğu içinde 'return' kullanmadan direkt olarak form submit edebilirsiniz
+            swalWithBootstrapButtons.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Silme işlemi onaylandı, formu submit et
+                    document.forms[2].submit();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Silme işlemi iptal edildi
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Role is safe",
+                        icon: "error"
+                    });
+                }
+            });
+
+            // Formu submit etme, çünkü işlem asenkron olabilir ve 'return' ifadesini burada kullanamayabilirsiniz
+            return false;
+        };
+    </script>
+
+
+
+}
 

@@ -15,6 +15,8 @@ namespace AuthIdentity.Core.Services
         Task<IdentityResult> UpdateSecurityStampAsync(AuthIdentityUser authIdentityUser);
         Task LogoutAsync();
         Task<IdentityResult> UpdateUserByUserAsync(AuthIdentityUser authIdentityUser);
-        public Task<(bool, IEnumerable<IdentityError>)> RegisterUserByUserDtoAsync(AuthIdentityUserRegisterDto authIdentityUserRegisterDto);
+        Task<(bool, IEnumerable<IdentityError>)> RegisterUserByUserDtoAsync(AuthIdentityUserRegisterDto authIdentityUserRegisterDto);
+        Task<IdentityResult> DeleteUserByUserAsync(AuthIdentityUser user);
+        Task<AuthIdentityUser> GetUserByIdAsync(string id);
     }
 }
